@@ -3,6 +3,9 @@ package com.skilldistillery.artisphere.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,24 +19,22 @@ public class Museum {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false, length = 255)
     private String name;
 
-    @Column(nullable = false, length = 255)
     private String location;
 
-    @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "website_url", length = 255)
+    @Column(name = "website_url")
     private String websiteUrl;
 
-    @Column(length = 255)
     private String image;
 
-    @Column(name = "created_at", nullable = false)
+    @CreationTimestamp
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 

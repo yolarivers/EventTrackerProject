@@ -2,6 +2,9 @@ package com.skilldistillery.artisphere.entities;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,10 +19,8 @@ public class Artwork {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false, length = 255)
     private String title;
 
-    @Column(nullable = false, length = 255)
     private String artist;
 
     @ManyToOne
@@ -33,15 +34,15 @@ public class Artwork {
     @Column(name = "creation_year")
     private int creationYear;
 
-    @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(length = 255)
     private String image;
 
-    @Column(name = "created_at", nullable = false)
+    @CreationTimestamp
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
