@@ -15,6 +15,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Museum {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
