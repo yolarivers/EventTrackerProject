@@ -46,7 +46,7 @@ public class Artwork {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Getters and Setters
+   
     public int getId() {
         return id;
     }

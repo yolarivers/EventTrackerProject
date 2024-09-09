@@ -33,6 +33,9 @@ public class Exhibition {
 
     @Column(name = "end_date")
     private LocalDate endDate;
+    
+   
+    private String description;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -45,7 +48,7 @@ public class Exhibition {
     @OneToMany(mappedBy = "exhibition")
     private List<Artwork> artworks;
 
-    // Getters and Setters
+   
     public int getId() {
         return id;
     }
@@ -84,6 +87,15 @@ public class Exhibition {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+  
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalDateTime getCreatedAt() {

@@ -42,7 +42,7 @@ public class Museum {
     @OneToMany(mappedBy = "museum")
     private List<Exhibition> exhibitions;
 
-    // Getters and Setters
+
     public int getId() {
         return id;
     }
