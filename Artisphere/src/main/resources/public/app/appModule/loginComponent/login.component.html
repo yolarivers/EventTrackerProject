@@ -1,0 +1,31 @@
+<app-nav></app-nav>
+
+<div class="container">
+    <h1 class="text-center">Login</h1>
+    
+    <form name="loginForm" ng-submit="$ctrl.login()" novalidate>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" ng-model="$ctrl.user.username" required>
+            <div ng-show="loginForm.username.$touched && loginForm.username.$invalid" class="text-danger">
+                Username is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" ng-model="$ctrl.user.password" required>
+            <div ng-show="loginForm.password.$touched && loginForm.password.$invalid" class="text-danger">
+                Password is required.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" ng-disabled="loginForm.$invalid">Login</button>
+    </form>
+
+    <p class="text-center mt-3">
+        Don't have an account? <a href="#!/signup">Sign Up</a>
+    </p>
+</div>
+
+<app-footer></app-footer>
