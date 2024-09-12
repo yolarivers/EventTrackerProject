@@ -3,9 +3,12 @@ package com.skilldistillery.artisphere.entities;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,7 +37,6 @@ public class Exhibition {
     @Column(name = "end_date")
     private LocalDate endDate;
     
-   
     private String description;
 
     @CreationTimestamp
@@ -46,9 +48,10 @@ public class Exhibition {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "exhibition")
+    @JsonIgnore
     private List<Artwork> artworks;
 
-   
+
     public int getId() {
         return id;
     }
@@ -89,7 +92,6 @@ public class Exhibition {
         this.endDate = endDate;
     }
 
-  
     public String getDescription() {
         return description;
     }
@@ -120,5 +122,25 @@ public class Exhibition {
 
     public void setArtworks(List<Artwork> artworks) {
         this.artworks = artworks;
+    }
+
+   
+    @Override
+    public String toString() {
+        return "Exhibition [id=" + id + ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+    }
+
+   
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Exhibition that = (Exhibition) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

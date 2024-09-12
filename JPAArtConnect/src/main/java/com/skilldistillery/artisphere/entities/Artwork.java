@@ -1,6 +1,7 @@
 package com.skilldistillery.artisphere.entities;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -15,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Artwork {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -46,7 +48,6 @@ public class Artwork {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-   
     public int getId() {
         return id;
     }
@@ -125,5 +126,25 @@ public class Artwork {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+  
+    @Override
+    public String toString() {
+        return "Artwork [id=" + id + ", title=" + title + ", artist=" + artist + ", creationYear=" + creationYear + "]";
+    }
+
+  
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artwork artwork = (Artwork) o;
+        return id == artwork.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

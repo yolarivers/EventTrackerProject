@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.skilldistillery.artisphere.entities.Review;
 
-@Repository
+
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
 }

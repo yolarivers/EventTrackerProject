@@ -1,6 +1,7 @@
 package com.skilldistillery.artisphere.entities;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -43,7 +44,7 @@ public class Review {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-   
+  
     public int getId() {
         return id;
     }
@@ -106,5 +107,25 @@ public class Review {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+  
+    @Override
+    public String toString() {
+        return "Review [id=" + id + ", rating=" + rating + ", comment=" + comment + "]";
+    }
+
+  
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Review review = (Review) o;
+        return id == review.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

@@ -2,9 +2,12 @@ package com.skilldistillery.artisphere.entities;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +18,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Museum {
-	
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -40,9 +43,10 @@ public class Museum {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "museum")
+    @JsonIgnore 
     private List<Exhibition> exhibitions;
 
-
+  
     public int getId() {
         return id;
     }
@@ -113,5 +117,25 @@ public class Museum {
 
     public void setExhibitions(List<Exhibition> exhibitions) {
         this.exhibitions = exhibitions;
+    }
+
+    
+    @Override
+    public String toString() {
+        return "Museum [id=" + id + ", name=" + name + ", location=" + location + "]";
+    }
+
+ 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Museum museum = (Museum) o;
+        return id == museum.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

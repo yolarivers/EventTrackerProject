@@ -5,11 +5,10 @@ import java.util.List;
 import com.skilldistillery.artisphere.entities.Museum;
 
 public interface MuseumService {
-	
-	List<Museum> getAllMuseums();
-	Museum showMuseum(int museumId);
-	Museum create(Museum newMuseum);
-	Museum update(int museumId, Museum updatingMuseum);
-	boolean delete(int caveId);
-	
+    List<Museum> getAllMuseums();
+    Museum showMuseum(int museumId);
+    Museum create(Museum newMuseum);
+    Museum update(int museumId, Museum updatingMuseum);
+    boolean delete(int museumId);
+	Museum findById(int id);
 }
