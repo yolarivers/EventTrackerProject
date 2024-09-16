@@ -66,3 +66,36 @@ Here are the key API endpoints to interact with the backend:
 
 ---
 
+
+
+![ER Diagram](https://github.com/user-attachments/assets/30336a89-7ffc-4316-9ed4-280396a15aed)
+
+
+# Museum and Artwork Management ER Diagram
+
+This ER diagram shows the relationships between entities in a **Museum and Artwork Management System**:
+
+## Museum
+- Contains museum details like name, location, and website.
+- One-to-many relationship with exhibitions.
+
+## Exhibition
+- Holds exhibition details like title, dates, and description.
+- Linked to a museum and can contain multiple artworks.
+
+## Artwork
+- Includes artwork details such as title, artist, and creation year.
+- Linked to both a museum and an exhibition.
+
+## User
+- Stores user account details (username, email, password).
+- Can favorite exhibitions or artworks and leave reviews.
+
+## Favorite
+- Allows users to save exhibitions and artworks as favorites.
+
+## Review
+- Allows users to rate and review exhibitions and artworks.
+
+Each entity connects through foreign keys, facilitating relationships between museums, exhibitions, artworks, and users.
+
