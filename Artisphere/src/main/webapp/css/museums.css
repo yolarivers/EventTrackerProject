@@ -1,0 +1,60 @@
+/* Style for the map */
+    #map {
+      height: 500px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    /* Loading spinner */
+    .loading-spinner {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* Customizing the results section */
+    #museumResults {
+      margin-top: 20px;
+    }
+
+    /* Center form vertically */
+    .vertical-center {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    
+    .view-on-map-btn {
+	margin-top: 10px;
+	background-color: #009688;
+	color: white;
+	border: none;
+	padding: 8px 12px;
+	border-radius: 4px;
+}
+
+.btn-primary {
+    background-color: #009688;
+    border-color: #009688;
+}
+
+.btn-primary:hover {
+    background-color: #00796b;
+    border-color: #00796b;
+}
+
+
+.view-on-map-btn:hover {
+	background-color: #000000;
+}
+.btn-custom {
+    background-color: #870096;
+    border-color: #870096;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #6b0076; /* Slightly darker shade for hover effect */
+    border-color: #6b0076;
+}

@@ -300,6 +300,11 @@ input[type="checkbox"] {
 	color: #555;
 }
 
+
+
+
+
+
 /* Museum Starts */
 #map {
 	height: 500px;
@@ -356,15 +361,26 @@ input[type="checkbox"] {
 
 .view-on-map-btn {
 	margin-top: 10px;
-	background-color: #2980b9;
+	background-color: #009688;
 	color: white;
 	border: none;
 	padding: 8px 12px;
 	border-radius: 4px;
 }
 
+.btn-primary {
+    background-color: #009688;
+    border-color: #009688;
+}
+
+.btn-primary:hover {
+    background-color: #00796b;
+    border-color: #00796b;
+}
+
+
 .view-on-map-btn:hover {
-	background-color: #1c5985;
+	background-color: #000000;
 }
 
 /* Artwork Starts */
@@ -442,3 +458,22 @@ input[type="checkbox"] {
       padding: 10px;
       text-align: center;
     }
+    
+    
+    .museum-header {
+	background-color: #870096;
+	padding: 60px 20px;
+	text-align: center;
+}
+
+.museum-header h1 {
+	font-size: 48px;
+	margin: 0;
+	color: #ffffff;
+}
+
+.museum-header p {
+	font-size: 18px;
+	color: #ffffff;
+	
+}
