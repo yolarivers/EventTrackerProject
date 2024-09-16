@@ -98,3 +98,129 @@ footer {
 	height: 60px; 
 	width: auto; 
 }
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+section {
+    padding: 40px;
+}
+
+/* Exhibition Styles */
+
+.exhibition-header {
+    background-color: #96000D;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.exhibition-header h1 {
+    font-size: 48px;
+    margin: 0;
+    color: #ffffff;
+}
+
+.exhibition-header p {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+
+.current-exhibitions {
+    background-color: white;
+    padding: 60px 20px;
+}
+
+.current-exhibitions h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+.exhibition-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.exhibition-item {
+    width: 300px;
+    margin: 20px;
+    text-align: center;
+}
+
+.exhibition-item img {
+    width: 100%;
+    height: auto;
+}
+
+.exhibition-details {
+    margin-top: 10px;
+}
+
+.exhibition-details h3 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.exhibition-details p {
+    font-size: 16px;
+    color: gray;
+}
+
+.submit-event {
+    background-color: white;
+    padding: 60px 20px;
+}
+
+.submit-event h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+input[type="text"], input[type="date"], input[type="time"], button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #96000D;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #000000;
+}
+
+input[type="checkbox"] {
+    margin-left: 10px;
+}
