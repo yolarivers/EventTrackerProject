@@ -2,8 +2,9 @@ package com.skilldistillery.museums.controllers;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;    
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,24 +59,41 @@ public class ExhibitionController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
+	@PostMapping("/upload")
+	public String handleFileUpload(@RequestParam("file") MultipartFile file,
+	                               @RequestParam("title") String title,
+	                               @RequestParam("startDate") String startDate,
+	                               @RequestParam("endDate") String endDate,
+	                               @RequestParam("description") String description,
+	                               Model model) {
+	
+		String uploadDir = "src/main/webapp/uploads/images/";
+		String fileName = file.getOriginalFilename();
+		Path filePath = Paths.get(uploadDir, fileName);
 
+		try {
+			
+			Files.write(filePath, file.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "error";
+		}
 
-@PostMapping("/upload")
-public String handleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
-    String uploadDir = "src/main/webapp/uploads/";
-    String fileName = file.getOriginalFilename();
-    Path filePath = Paths.get(uploadDir, fileName);
-    
-    try {
-        
-        Files.write(filePath, file.getBytes());
-    } catch (IOException e) {
-        e.printStackTrace();
-        return "error";
-    }
-    
-    model.addAttribute("filePath", "/uploads/" + fileName);
-    return "uploadSuccess";  
-}
+		
+		Exhibition newExhibition = new Exhibition();
+		newExhibition.setTitle(title);
+		newExhibition.setStartDate(LocalDate.parse(startDate)); 
+		newExhibition.setEndDate(LocalDate.parse(endDate));
+		newExhibition.setDescription(description);
+		newExhibition.setImage("/uploads/images/" + fileName);
 
+		
+		exhibitionService.saveExhibition(newExhibition);
+
+		
+		model.addAttribute("filePath", "/uploads/images/" + fileName);
+
+	
+		return "uploadSuccess"; 
+	}
 }
