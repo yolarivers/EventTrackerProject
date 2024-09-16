@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+.curated-section {
+	text-align: center;
+	padding: 50px 15px;
+}
+
+.curated-title {
+	color: #009688; 
+	font-weight: 700;
+}
+
+.curated-description {
+	font-size: 1.1em;
+	color: #5e5e5e;
+}
+
+.curated-line {
+	margin-top: 30px;
+	border-top: 1px solid #ddd;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.top-space {
+	background-color: #009688;
+	height: 50px;
+}
+
+.hero-section {
+	text-align: center;
+	margin: 50px 0;
+}
+
+.card-img-top {
+	height: 300px;
+	object-fit: cover;
+}
+
+.btn-custom {
+	background-color: #009688;
+	color: white;
+}
+
+.btn-custom:hover {
+	background-color: #00796b;
+}
+
+.center-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.footer {
+	background-color: black;
+	padding: 20px 0;
+	text-align: center;
+}
+
+.btn-rectangle {
+	background-color: black;
+	color: white;
+	border-radius: 0;
+	border: none;
+	padding: 10px 20px;
+}
+
+.btn-rectangle:hover {
+	background-color: #333;
+}
+
+.dropdown-login {
+	width: 300px;
+	padding: 20px;
+}
+
+.dropdown-login input {
+	margin-bottom: 10px;
+}
+
+.login-btn {
+	background-color: #009688;
+	color: white;
+}
+
+.login-btn:hover {
+	background-color: #009688;
+}
+
+footer {
+	flex-shrink: 0;
+}
+
+
+.navbar-brand img {
+	height: 60px; 
+	width: auto; 
+}
