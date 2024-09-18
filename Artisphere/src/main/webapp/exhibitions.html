@@ -40,20 +40,21 @@
         </div>
     </section>
 
-    <section id="exhibitions">
-        <div class="exhibition-grid">
-            <div th:each="event : ${events}" class="exhibition-item">
-                <h3 th:text="${event.title}"></h3>
-                <p th:text="${event.startDate}"></p>
-                <p th:text="${event.endDate}"></p>
-                <p th:text="${event.description}"></p>
-                <img th:src="${event.image}" alt="Event Image" class="img-fluid">
-              
-                <button th:onclick="'/api/exhibitions/' + ${event.id} + '/edit'">Edit</button>
-                <button th:onclick="'/api/exhibitions/' + ${event.id} + '/delete'">Delete</button>
-            </div>
+   <section id="exhibitions">
+    <div class="exhibition-grid">
+        <div th:each="event : ${events}" class="exhibition-item">
+            <h3 th:text="${event.title}"></h3>
+            <p th:text="${event.startDate}"></p>
+            <p th:text="${event.endDate}"></p>
+            <p th:text="${event.description}"></p>
+            <img th:src="@{'/uploads/images/' + ${event.image}}" alt="Event Image" class="img-fluid">
+           
+            <button th:onclick="'/api/exhibitions/' + ${event.id} + '/edit'">Edit</button>
+            <button th:onclick="'/api/exhibitions/' + ${event.id} + '/delete'">Delete</button>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <section class="submit-event">
         <h2>Submit Your Event</h2>

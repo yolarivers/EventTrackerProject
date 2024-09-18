@@ -32,21 +32,20 @@ public class ExhibitionController {
     @Autowired
     private ExhibitionService exhibitionService;
 
-  
     @PostMapping("/upload")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file,
                                    @RequestParam("title") String title,
                                    @RequestParam("startDate") String startDate,
                                    @RequestParam("endDate") String endDate,
-                                   @RequestParam("description") String description) {
+                                   @RequestParam("description") String description,
+                                   Model model) {
 
-       
         String uploadDir = "src/main/webapp/uploads/images/";
         String fileName = file.getOriginalFilename();
         Path filePath = Paths.get(uploadDir, fileName);
 
         try {
-            
+           
             Files.createDirectories(Paths.get(uploadDir));
             Files.write(filePath, file.getBytes());
         } catch (IOException e) {
@@ -54,17 +53,20 @@ public class ExhibitionController {
             return new ResponseEntity<>("Error uploading file", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-       
         Exhibition newExhibition = new Exhibition();
         newExhibition.setTitle(title);
         newExhibition.setStartDate(LocalDate.parse(startDate));
         newExhibition.setEndDate(LocalDate.parse(endDate));
         newExhibition.setDescription(description);
-        newExhibition.setImage("/uploads/images/" + fileName); 
-        
+        newExhibition.setImage("/uploads/images/" + fileName);
+
         exhibitionService.saveExhibition(newExhibition);
+        model.addAttribute("filePath", "/uploads/images/" + fileName);
+
         return new ResponseEntity<>("Exhibition created successfully", HttpStatus.CREATED);
     }
+ 
+
 
    
     @PutMapping("/{id}")
