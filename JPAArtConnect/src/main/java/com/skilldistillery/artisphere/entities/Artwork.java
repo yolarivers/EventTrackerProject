@@ -147,4 +147,8 @@ public class Artwork {
     public int hashCode() {
         return Objects.hash(id);
     }
+    
+    
+   
+    
 }

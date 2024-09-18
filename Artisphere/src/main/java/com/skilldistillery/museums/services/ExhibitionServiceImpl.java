@@ -30,7 +30,8 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
-    public void deleteExhibition(int id) {
+    public boolean deleteExhibition(int id) {
         exhibitionRepository.deleteById(id);
+		return false;
     }
 }

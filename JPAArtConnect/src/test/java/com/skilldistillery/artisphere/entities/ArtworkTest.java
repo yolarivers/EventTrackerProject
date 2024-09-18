@@ -56,4 +56,6 @@ class ArtworkTest {
 		assertNull(emptyArtwork.getDescription());
 		assertNull(emptyArtwork.getImage());
 	}
+	
+	
 }

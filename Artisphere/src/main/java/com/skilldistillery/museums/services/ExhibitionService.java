@@ -7,5 +7,5 @@ public interface ExhibitionService {
     Exhibition saveExhibition(Exhibition exhibition);
     Exhibition getExhibitionById(int id);
     List<Exhibition> getAllExhibitions();
-    void deleteExhibition(int id);
+    boolean deleteExhibition(int id);
 }

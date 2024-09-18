@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `exhibition` (
   `end_date` DATE NULL DEFAULT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `image` VARCHAR(450) NULL,
   PRIMARY KEY (`id`),
   INDEX (`museum_id` ASC) VISIBLE);
 
@@ -147,7 +148,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `artworlddb`;
-INSERT INTO `exhibition` (`id`, `title`, `museum_id`, `description`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES (1, 'Impressionist Masterpieces', 1, '\"A stunning collection of Impressionist art from the late 19th and early 20th centuries, featuring works by Monet, Renoir, and Degas. This exhibition explores the techniques and themes that defined the movement, from the play of light to the beauty of everyday life.\"', '2023-02-01', '2023-12-31', '2022-12-20 11:45:30', '2023-12-01 09:50:00');
+INSERT INTO `exhibition` (`id`, `title`, `museum_id`, `description`, `start_date`, `end_date`, `created_at`, `updated_at`, `image`) VALUES (1, 'Impressionist Masterpieces', 1, '\"A stunning collection of Impressionist art from the late 19th and early 20th centuries, featuring works by Monet, Renoir, and Degas. This exhibition explores the techniques and themes that defined the movement, from the play of light to the beauty of everyday life.\"', '2023-02-01', '2023-12-31', '2022-12-20 11:45:30', '2023-12-01 09:50:00', '1.jpg');
 
 COMMIT;
 
