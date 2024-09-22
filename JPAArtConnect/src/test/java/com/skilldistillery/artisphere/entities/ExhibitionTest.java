@@ -18,15 +18,17 @@ class ExhibitionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+	
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
+		
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
-	
+		
 		exhibition = new Exhibition();
 		exhibition.setId(1);
 		exhibition.setTitle("Impressionist Masterpieces");
@@ -37,12 +39,13 @@ class ExhibitionTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		exhibition = null;  
+	
+		exhibition = null;
 	}
 
 	@Test
 	void testExhibitionFields() {
-		
+	
 		assertEquals(1, exhibition.getId());
 		assertEquals("Impressionist Masterpieces", exhibition.getTitle());
 		assertEquals(LocalDate.of(2023, 2, 1), exhibition.getStartDate());
@@ -52,7 +55,7 @@ class ExhibitionTest {
 
 	@Test
 	void testExhibitionDefaultConstructor() {
-	
+		
 		Exhibition emptyExhibition = new Exhibition();
 		assertNotNull(emptyExhibition);
 		assertNull(emptyExhibition.getTitle());

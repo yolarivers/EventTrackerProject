@@ -41,10 +41,13 @@
 .btn-custom {
 	background-color: #009688;
 	color: white;
+	
+				
 }
 
 .btn-custom:hover {
 	background-color: #00796b;
+	color: white;
 }
 
 .center-content {
@@ -87,6 +90,7 @@
 
 .login-btn:hover {
 	background-color: #009688;
+	color: white;
 }
 
 footer {
@@ -116,6 +120,7 @@ section {
 /* Exhibition Styles */
 .exhibition-header {
 	background-color: #96000D;
+	color: white;
 	padding: 60px 20px;
 	text-align: center;
 }
@@ -173,8 +178,9 @@ section {
 }
 
 .submit-event {
-	background-color: white;
+	background-color: #009688;
 	padding: 60px 20px;
+	color: white;
 }
 
 .submit-event h2 {
@@ -214,6 +220,7 @@ button {
 
 button:hover {
 	background-color: #000000;
+	color: white;
 }
 
 input[type="checkbox"] {
@@ -306,6 +313,7 @@ input[type="checkbox"] {
 
 
 /* Museum Starts */
+
 #map {
 	height: 500px;
 	width: 100%;
@@ -315,6 +323,7 @@ input[type="checkbox"] {
 .loading-spinner {
 	text-align: center;
 	margin-top: 20px;
+	color: #009688;
 }
 
 #museumResults {
@@ -370,17 +379,20 @@ input[type="checkbox"] {
 
 .btn-primary {
     background-color: #009688;
+    color: white;
     border-color: #009688;
 }
 
 .btn-primary:hover {
     background-color: #00796b;
+    color: white;
     border-color: #00796b;
 }
 
 
 .view-on-map-btn:hover {
 	background-color: #000000;
+	color: white;
 }
 
 /* Artwork Starts */

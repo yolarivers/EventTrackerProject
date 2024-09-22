@@ -1,6 +1,7 @@
 package com.skilldistillery.museums.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,11 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 
     @Override
     public Exhibition getExhibitionById(int id) {
-        return exhibitionRepository.findById(id).orElse(null);
+        Optional<Exhibition> opt = exhibitionRepository.findById(id);
+        if (opt.isPresent()) {
+            return opt.get();
+        }
+        return null;
     }
 
     @Override
@@ -31,7 +36,10 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 
     @Override
     public boolean deleteExhibition(int id) {
-        exhibitionRepository.deleteById(id);
-		return false;
+        if (exhibitionRepository.existsById(id)) {
+            exhibitionRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

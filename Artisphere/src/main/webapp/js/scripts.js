@@ -6,13 +6,14 @@ document.getElementById('allDay').addEventListener('change', function() {
     endTime.disabled = this.checked;
 });
 
-// Exhibition Form
+
 document.getElementById('eventForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
     const eventName = document.getElementById('eventName').value;
     const startDate = document.getElementById('startDate').value;
     const imageFile = document.getElementById('imageFile').files[0];
+	const imageSrc = e.target.result || 'path/to/museum.jpg';
 
     const reader = new FileReader();
     reader.onload = function(e) {

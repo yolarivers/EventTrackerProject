@@ -1,0 +1,168 @@
+@charset "UTF-8";
+
+.curated-section {
+	text-align: center;
+	padding: 40px 10px;
+}
+
+.curated-title {
+	color: #009688;
+	font-weight: 700;
+}
+
+.curated-description {
+	font-size: 1.1em;
+	color: #5e5e5e;
+}
+
+.curated-line {
+	margin-top: 20px;
+	border-top: 1px solid #ddd;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.top-space {
+	background-color: #009688;
+	height: 50px;
+}
+
+.hero-section {
+	text-align: center;
+	margin: 40px 0;
+}
+
+.card-img-top {
+	height: 300px;
+	object-fit: cover;
+}
+
+.btn-custom, .btn-primary {
+	background-color: #009688;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 12px 20px;
+	transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover, .btn-primary:hover {
+	background-color: #00796b;
+}
+
+.center-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.footer {
+	background-color: black;
+	padding: 20px 0;
+	text-align: center;
+}
+
+.login-btn {
+	background-color: #009688;
+	color: white;
+	border: none;
+	padding: 12px;
+	border-radius: 5px;
+}
+
+.login-btn:hover {
+	background-color: #00796b;
+}
+
+section {
+	padding: 40px;
+}
+
+
+.museum-card, .artwork-item {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	box-shadow: none;
+}
+
+
+.exhibition-header, .artwork-header, .museum-header {
+	background-color: #96000D;
+	color: white;
+	padding: 50px 20px;
+	text-align: center;
+}
+
+.exhibition-header h1, .artwork-header h1, .museum-header h1 {
+	font-size: 48px;
+	margin: 0;
+}
+
+.exhibition-header p, .artwork-header p, .museum-header p {
+	font-size: 18px;
+}
+
+.form-control {
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	padding: 10px;
+}
+
+button[type="submit"] {
+	background-color: #009688;
+	color: white;
+	border: none;
+	padding: 12px;
+	border-radius: 5px;
+	font-size: 18px;
+	transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+	background-color: #00796b;
+}
+
+input[type="checkbox"] {
+	margin-left: 10px;
+}
+
+
+.artwork-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 20px;
+	padding: 20px;
+}
+
+.artwork-item img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.artwork-title {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	color: white;
+	padding: 10px;
+	text-align: center;
+}
+
+
+.no-shadows {
+	box-shadow: none;
+}
+
+.btn-primary, .btn-rectangle {
+	background-color: #009688;
+	color: white;
+	border: none;
+}
+
+.btn-primary:hover, .btn-rectangle:hover {
+	background-color: #00796b;
+}
+
