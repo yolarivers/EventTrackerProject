@@ -32,7 +32,8 @@ public class Museum {
     @Column(name = "website_url")
     private String websiteUrl;
 
-    private String image;
+    @Column(name = "image_url")
+    private String imageUrl;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -87,12 +88,12 @@ public class Museum {
         this.websiteUrl = websiteUrl;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String image) {
+        this.imageUrl = image;
     }
 
     public LocalDateTime getCreatedAt() {

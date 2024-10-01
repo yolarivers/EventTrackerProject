@@ -29,7 +29,7 @@ class MuseumTest {
 		museum.setLocation("New York City");
 		museum.setDescription("A world-renowned museum showcasing modern art.");
 		museum.setWebsiteUrl("http://www.artmuseum.com");
-		museum.setImage("museum_image.jpg");
+		museum.setImageUrl("museum_image.jpg");
 	}
 
 	@AfterEach
@@ -45,7 +45,7 @@ class MuseumTest {
 		assertEquals("New York City", museum.getLocation());
 		assertEquals("A world-renowned museum showcasing modern art.", museum.getDescription());
 		assertEquals("http://www.artmuseum.com", museum.getWebsiteUrl());
-		assertEquals("museum_image.jpg", museum.getImage());
+		assertEquals("museum_image.jpg", museum.getImageUrl());
 	}
 
 	@Test

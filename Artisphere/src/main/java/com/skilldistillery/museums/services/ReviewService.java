@@ -1,11 +1,11 @@
 package com.skilldistillery.museums.services;
 
 import java.util.List;
-import com.skilldistillery.artisphere.entities.Review;
+import com.skilldistillery.artisphere.entities.ArtworkReview;
 
 public interface ReviewService {
-    Review saveReview(Review review);
-    Review getReviewById(int id);
-    List<Review> getAllReviews();
+    ArtworkReview saveReview(ArtworkReview artworkReview);
+    ArtworkReview getReviewById(int id);
+    List<ArtworkReview> getAllReviews();
     void deleteReview(int id);
 }

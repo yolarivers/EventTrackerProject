@@ -14,37 +14,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.artisphere.entities.Review;
+import com.skilldistillery.artisphere.entities.ArtworkReview;
 import com.skilldistillery.museums.services.ReviewService;
 
 @RestController
-@RequestMapping("/api/reviews")
-@CrossOrigin("*")
+@RequestMapping("/api/review")
+@CrossOrigin({"*", "http://localhost/"})
 public class ReviewController {
 
     @Autowired
     private ReviewService reviewService;
 
     @PostMapping
-    public ResponseEntity<Review> createReview(@RequestBody Review review) {
-        Review createdReview = reviewService.saveReview(review);
+    public ResponseEntity<ArtworkReview> createReview(@RequestBody ArtworkReview artworkReview) {
+        ArtworkReview createdReview = reviewService.saveReview(artworkReview);
         return new ResponseEntity<>(createdReview, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Review> getReviewById(@PathVariable int id) {
-        Review review = reviewService.getReviewById(id);
-        if (review != null) {
-            return new ResponseEntity<>(review, HttpStatus.OK);
+    public ResponseEntity<ArtworkReview> getReviewById(@PathVariable int id) {
+        ArtworkReview artworkReview = reviewService.getReviewById(id);
+        if (artworkReview != null) {
+            return new ResponseEntity<>(artworkReview, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping
-    public ResponseEntity<List<Review>> getAllReviews() {
-        List<Review> reviews = reviewService.getAllReviews();
-        return new ResponseEntity<>(reviews, HttpStatus.OK);
+    public ResponseEntity<List<ArtworkReview>> getAllReviews() {
+        List<ArtworkReview> artworkReviews = reviewService.getAllReviews();
+        return new ResponseEntity<>(artworkReviews, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

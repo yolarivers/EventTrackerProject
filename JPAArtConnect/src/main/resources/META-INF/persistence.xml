@@ -7,7 +7,7 @@
     
     		<class>com.skilldistillery.artisphere.entities.Museum</class>
           	<class>com.skilldistillery.artisphere.entities.Artwork</class>
-          	<class>com.skilldistillery.artisphere.entities.Review</class>
+          	<class>com.skilldistillery.artisphere.entities.ArtworkReview</class>
           	<class>com.skilldistillery.artisphere.entities.User</class>
           	<class>com.skilldistillery.artisphere.entities.Exhibition</class>
        

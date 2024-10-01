@@ -1,16 +1,22 @@
 package com.skilldistillery.artisphere.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class User {
@@ -26,6 +32,8 @@ public class User {
     private String password;
 
     private String role;
+    
+    private Boolean enabled;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -34,7 +42,17 @@ public class User {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    
+    @JoinTable(name = "favorite_artwork", joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns =@JoinColumn(name="artwork_id"))
+    @ManyToMany
+    @JsonIgnore
+    private List<Artwork> favoriteArtworks;
 
+    
+    @JoinTable(name = "favorite_exhibition", joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns =@JoinColumn(name="exhibition_id"))
+    @ManyToMany
+    @JsonIgnore
+    private List<Exhibition> favoriteExhibitions;
    
     public int getId() {
         return id;
@@ -93,7 +111,31 @@ public class User {
     }
 
     
-    @Override
+    public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<Artwork> getFavoriteArtworks() {
+		return favoriteArtworks;
+	}
+
+	public void setFavoriteArtworks(List<Artwork> favoriteArtworks) {
+		this.favoriteArtworks = favoriteArtworks;
+	}
+
+	public List<Exhibition> getFavoriteExhibitions() {
+		return favoriteExhibitions;
+	}
+
+	public void setFavoriteExhibitions(List<Exhibition> favoriteExhibitions) {
+		this.favoriteExhibitions = favoriteExhibitions;
+	}
+
+	@Override
     public String toString() {
         return "User [id=" + id + ", username=" + username + ", email=" + email + ", role=" + role + "]";
     }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.artisphere.entities.Review;
+import com.skilldistillery.artisphere.entities.ArtworkReview;
 import com.skilldistillery.museums.repositories.ReviewRepository;
 
 @Service
@@ -15,17 +15,17 @@ public class ReviewServiceImpl implements ReviewService {
     private ReviewRepository reviewRepository;
 
     @Override
-    public Review saveReview(Review review) {
-        return reviewRepository.save(review);
+    public ArtworkReview saveReview(ArtworkReview artworkReview) {
+        return reviewRepository.save(artworkReview);
     }
 
     @Override
-    public Review getReviewById(int id) {
+    public ArtworkReview getReviewById(int id) {
         return reviewRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List<Review> getAllReviews() {
+    public List<ArtworkReview> getAllReviews() {
         return reviewRepository.findAll();
     }
 

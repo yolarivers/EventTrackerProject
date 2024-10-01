@@ -1,0 +1,41 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="assets/artisphere-logo.png" width="30" height="30" alt="logo" />    </a>
+    <a class="navbar-brand" href="#">Home</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link disabled" href="#">Disabled</a>
+
+    <form class="form-inline my-2 my-lg-0 ml-auto">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" />
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </nav>
+
+  <div class="jumbotron">
+    <h1 class="display-4">Welcome, Museum Explorer</h1>
+  </div>
+
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Task</th>
+        <th scope="col">Formation Type</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let museum of museums">
+        <td>{{ museum.name }}</td>
+        <td>
+          <select class="form-control" [(ngModel)]="museum.type">
+            <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+          </select>
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteMuseum(museum)">X</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

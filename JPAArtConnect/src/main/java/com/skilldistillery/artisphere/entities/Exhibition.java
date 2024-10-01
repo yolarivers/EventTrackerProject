@@ -19,6 +19,40 @@ public class Exhibition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+   
+    private String title;
+    
+    @ManyToOne
+    @JoinColumn(name = "museum_id")
+    private Museum museum;
+
+   
+    private String description;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    private LocalDate endDate;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+    
+    @JoinTable(name = "exhibition_has_artwork", joinColumns = @JoinColumn(name="exhibition_id"),inverseJoinColumns =@JoinColumn(name="artwork_id"))
+    @ManyToMany
+    @JsonIgnore
+    private List<Artwork> artworks;
+
+    
+    
     public int getId() {
 		return id;
 	}
@@ -67,12 +101,12 @@ public class Exhibition {
 		this.endDate = endDate;
 	}
 
-	public String getEventImage() {
-		return eventImage;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setEventImage(String eventImage) {
-		this.eventImage = eventImage;
+	public void setImageUrl(String eventImage) {
+		this.imageUrl = eventImage;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -99,36 +133,6 @@ public class Exhibition {
 		this.artworks = artworks;
 	}
 
-	@Column(length = 255)
-    private String title;
-    
-    @ManyToOne
-    @JoinColumn(name = "museum_id")
-    private Museum museum;
-
-    @Column(columnDefinition = "TEXT")
-    private String description;
-
-    @Column(name = "start_date")
-    private LocalDate startDate;
-
-    @Column(name = "end_date")
-    private LocalDate endDate;
-
-    @Column(name = "event_image", length = 450)
-    private String eventImage;
-
-    @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
-    @OneToMany(mappedBy = "exhibition")
-    @JsonIgnore
-    private List<Artwork> artworks;
-
+	
     
 }

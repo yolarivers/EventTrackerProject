@@ -26,10 +26,11 @@ public class Artwork {
     private String artist;
 
     @ManyToOne
-    @JoinColumn(name = "exhibition_id")
-    private Exhibition exhibition;
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @ManyToOne
+
+	@ManyToOne
     @JoinColumn(name = "museum_id")
     private Museum museum;
 
@@ -48,6 +49,16 @@ public class Artwork {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    
+    public User getUser() {
+  		return user;
+  	}
+
+  	public void setUser(User user) {
+  		this.user = user;
+  	}
+    
+    
     public int getId() {
         return id;
     }
@@ -72,13 +83,7 @@ public class Artwork {
         this.artist = artist;
     }
 
-    public Exhibition getExhibition() {
-        return exhibition;
-    }
 
-    public void setExhibition(Exhibition exhibition) {
-        this.exhibition = exhibition;
-    }
 
     public Museum getMuseum() {
         return museum;

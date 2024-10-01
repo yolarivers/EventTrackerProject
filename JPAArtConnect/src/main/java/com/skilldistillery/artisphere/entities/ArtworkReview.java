@@ -15,7 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Review {
+public class ArtworkReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -23,10 +23,6 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "exhibition_id")
-    private Exhibition exhibition;
 
     @ManyToOne
     @JoinColumn(name = "artwork_id")
@@ -59,14 +55,6 @@ public class Review {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Exhibition getExhibition() {
-        return exhibition;
-    }
-
-    public void setExhibition(Exhibition exhibition) {
-        this.exhibition = exhibition;
     }
 
     public Artwork getArtwork() {
@@ -112,7 +100,7 @@ public class Review {
   
     @Override
     public String toString() {
-        return "Review [id=" + id + ", rating=" + rating + ", comment=" + comment + "]";
+        return "ArtworkReview [id=" + id + ", rating=" + rating + ", comment=" + comment + "]";
     }
 
   
@@ -120,8 +108,8 @@ public class Review {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Review review = (Review) o;
-        return id == review.id;
+        ArtworkReview artworkReview = (ArtworkReview) o;
+        return id == artworkReview.id;
     }
 
     @Override

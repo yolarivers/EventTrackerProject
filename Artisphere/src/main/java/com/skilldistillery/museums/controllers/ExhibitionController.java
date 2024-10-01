@@ -11,6 +11,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.skilldistillery.artisphere.entities.Exhibition;
 import com.skilldistillery.museums.services.ExhibitionService;
 
+@CrossOrigin({"*", "http://localhost/"})
 @RestController
-@RequestMapping("/api/exhibitions")
+@RequestMapping("/api/exhibition")
 public class ExhibitionController {
 
 	@Autowired
@@ -55,7 +57,7 @@ public class ExhibitionController {
 		newExhibition.setStartDate(LocalDate.parse(startDate));
 		newExhibition.setEndDate(LocalDate.parse(endDate));
 		newExhibition.setDescription(description);
-		newExhibition.setEventImage("/uploads/images/" + fileName);
+		newExhibition.setImageUrl("/uploads/images/" + fileName);
 
 		exhibitionService.saveExhibition(newExhibition);
 
@@ -78,7 +80,7 @@ public class ExhibitionController {
 			if (file != null && !file.isEmpty()) {
 				
 				try {
-					Files.deleteIfExists(Paths.get(existingExhibition.getEventImage()));
+					Files.deleteIfExists(Paths.get(existingExhibition.getImageUrl()));
 				} catch (IOException e) {
 					e.printStackTrace();
 					return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -89,7 +91,7 @@ public class ExhibitionController {
 				if (fileName == null) {
 					return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 				}
-				existingExhibition.setEventImage("/uploads/images/" + fileName);
+				existingExhibition.setImageUrl("/uploads/images/" + fileName);
 			}
 
 			exhibitionService.saveExhibition(existingExhibition);

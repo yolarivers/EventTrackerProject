@@ -1,0 +1,13 @@
+.container {
+  margin: 20px;
+}
+
+.jumbotron {
+  background-color: #e9ecef;
+  padding: 2rem 1rem;
+  border-radius: 0.3rem;
+}
+
+.table {
+  margin-top: 20px;
+}

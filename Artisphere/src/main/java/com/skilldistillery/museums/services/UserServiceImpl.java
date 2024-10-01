@@ -1,8 +1,11 @@
 package com.skilldistillery.museums.services;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.skilldistillery.artisphere.entities.User;
 import com.skilldistillery.museums.repositories.UserRepository;
 
@@ -10,30 +13,68 @@ import com.skilldistillery.museums.repositories.UserRepository;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository userRepo;
 
     @Override
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public User register(User user) {
+       
+        return userRepo.save(user);
     }
 
     @Override
+    public User updateUser(User user) {
+       
+        return userRepo.save(user);
+    }
+
+    /*@Override
     public User getUserById(int id) {
-        return userRepository.findById(id).orElse(null);
-    }
+      
+        return userRepo.findById(id);
+    }*/
 
     @Override
     public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        
+        return userRepo.findByUsername(username);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+       
+        return userRepo.findAll();
     }
 
     @Override
-    public void deleteUser(int id) {
-        userRepository.deleteById(id);
+    public boolean deleteUser(int id) {
+      
+        if (userRepo.existsById(id)) {
+            userRepo.deleteById(id);
+            return true;
+        }
+        return false;
     }
+
+	/*
+	 * @Override public String authenticate(String username, String password) {
+	 * 
+	 * User user = userRepo.findByUsernameAndPassword(username, password); if (user
+	 * != null) {
+	 * 
+	 * return "some-token"; } else {
+	 * 
+	 * return null; } }
+	 */
+
+	@Override
+	public User getUserById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User authenticate(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
