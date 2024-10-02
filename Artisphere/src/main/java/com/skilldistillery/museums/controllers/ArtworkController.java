@@ -1,5 +1,6 @@
 package com.skilldistillery.museums.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,14 +43,15 @@ public class ArtworkController {
     }
 
     @PostMapping("artworks")
-    public ResponseEntity<Artwork> createArtwork(@RequestBody Artwork newArtwork) {
-        Artwork createdArtwork = artworkService.create(newArtwork);
+    public ResponseEntity<Artwork> createArtwork(@RequestBody Artwork newArtwork, Principal principal) {
+    	
+        Artwork createdArtwork = artworkService.create(newArtwork, principal.getName());
         return new ResponseEntity<>(createdArtwork, HttpStatus.CREATED);
     }
 
     @PutMapping("artworks/{id}")
-    public ResponseEntity<Artwork> updateArtwork(@PathVariable int id, @RequestBody Artwork updatingArtwork) {
-        Artwork updatedArtwork = artworkService.update(id, updatingArtwork);
+    public ResponseEntity<Artwork> updateArtwork(@PathVariable int id, @RequestBody Artwork updatingArtwork, Principal principal) {
+        Artwork updatedArtwork = artworkService.update(id, updatingArtwork, principal.getName());
         if (updatedArtwork == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -57,8 +59,8 @@ public class ArtworkController {
     }
 
     @DeleteMapping("artworks/{id}")
-    public ResponseEntity<Void> deleteArtwork(@PathVariable int id) {
-        boolean deleted = artworkService.delete(id);
+    public ResponseEntity<Void> deleteArtwork(@PathVariable int id, Principal principal) {
+        boolean deleted = artworkService.delete(id, principal.getName());
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {

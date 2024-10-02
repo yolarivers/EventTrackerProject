@@ -72,9 +72,9 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
-	@Override
-	public User authenticate(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public User authenticate(String username, String password) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

@@ -10,5 +10,5 @@ public interface UserService {
     User getUserByUsername(String username); 
     List<User> getAllUsers();           
     boolean deleteUser(int id);         
-    User authenticate(String username, String password);  
+    //User authenticate(String username, String password);  
 }

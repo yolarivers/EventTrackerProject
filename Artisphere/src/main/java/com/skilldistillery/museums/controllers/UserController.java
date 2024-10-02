@@ -26,30 +26,26 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("register")
-    public ResponseEntity<User> register(@RequestBody User user, HttpServletResponse res) {
-        try {
-            user = userService.register(user);
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-    }
-
-  
-    @PostMapping("/login")
-    public ResponseEntity<String> authenticate(@RequestParam String username, @RequestParam String password, HttpServletResponse res) {
-        User authenticatedUser = userService.authenticate(username, password);
-        if (authenticatedUser != null) {
-     
-            String token = "Bearer some_generated_token"; 
-      
-            return new ResponseEntity<>("Login successful. Token: " + token, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
-        }
-    }
+	/*
+	 * @PostMapping("register") public ResponseEntity<User> register(@RequestBody
+	 * User user, HttpServletResponse res) { try { user =
+	 * userService.register(user); return new ResponseEntity<>(user,
+	 * HttpStatus.CREATED); } catch (Exception e) { e.printStackTrace(); return new
+	 * ResponseEntity<>(null, HttpStatus.BAD_REQUEST); } }
+	 * 
+	 * 
+	 * @PostMapping("/login") public ResponseEntity<String>
+	 * authenticate(@RequestParam String username, @RequestParam String password,
+	 * HttpServletResponse res) { User authenticatedUser =
+	 * userService.authenticate(username, password); if (authenticatedUser != null)
+	 * {
+	 * 
+	 * String token = "Bearer some_generated_token";
+	 * 
+	 * return new ResponseEntity<>("Login successful. Token: " + token,
+	 * HttpStatus.OK); } else { return new ResponseEntity<>("Invalid credentials",
+	 * HttpStatus.UNAUTHORIZED); } }
+	 */
 
 
    
