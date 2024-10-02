@@ -13,8 +13,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="artwork_review")
 public class ArtworkReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

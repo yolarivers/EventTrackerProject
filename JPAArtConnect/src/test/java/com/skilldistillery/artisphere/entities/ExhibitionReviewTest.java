@@ -5,18 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class ArtworkReviewTest {
+class ExhibitionReviewTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private ArtworkReview review;
+	private ExhibitionReview review;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -26,7 +26,7 @@ class ArtworkReviewTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		review = em.find(ArtworkReview.class, 1);
+		review = em.find(ExhibitionReview.class, 1);
 	}
 
 	@AfterAll
@@ -40,24 +40,29 @@ class ArtworkReviewTest {
 	}
 
 	@Test
-	void test_ArtworkReview_entity_mapping() {
+	void testExhibitionReviewFields() {
 		assertNotNull(review);
 		assertEquals(5, review.getRating());
-
 	}
 
 	@Test
-	void test_ArtworkReview_ManyToOne_User_mapping() {
+	void test_ExhibitionReview_entity_mapping() {
+		assertNotNull(review);
+		assertEquals(5, review.getRating());
+	}
+
+	@Test
+	void test_ExhibitionReview_ManyToOne_User_mapping() {
 		assertNotNull(review);
 		assertNotNull(review.getUser());
 		assertEquals(1, review.getUser().getId());
 	}
 
 	@Test
-	void test_ArtworkReview_ManyToOne_Artwork_mapping() {
+	void test_ExhibitionReview_ManyToOne_Exhibition_mapping() {
 		assertNotNull(review);
-		assertNotNull(review.getArtwork());
-		assertEquals(1, review.getArtwork().getId());
+		assertNotNull(review.getExhibition());
+		assertEquals(1, review.getExhibition().getId());
 	}
 
 }

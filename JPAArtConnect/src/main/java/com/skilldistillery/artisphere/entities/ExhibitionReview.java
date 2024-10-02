@@ -13,8 +13,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="exhibition_review")
 public class ExhibitionReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,7 +103,7 @@ public class ExhibitionReview {
   
     @Override
     public String toString() {
-        return "ArtworkReview [id=" + id + ", rating=" + rating + ", comment=" + comment + "]";
+        return "ExhibitionReview [id=" + id + ", rating=" + rating + ", comment=" + comment + "]";
     }
 
   
@@ -109,8 +111,8 @@ public class ExhibitionReview {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ExhibitionReview artworkReview = (ExhibitionReview) o;
-        return id == artworkReview.id;
+        ExhibitionReview exhibitionReview = (ExhibitionReview) o;
+        return id == exhibitionReview.id;
     }
 
     @Override

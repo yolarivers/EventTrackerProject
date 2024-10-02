@@ -8,6 +8,7 @@
     		<class>com.skilldistillery.artisphere.entities.Museum</class>
           	<class>com.skilldistillery.artisphere.entities.Artwork</class>
           	<class>com.skilldistillery.artisphere.entities.ArtworkReview</class>
+          	<class>com.skilldistillery.artisphere.entities.ExhibitionReview</class>
           	<class>com.skilldistillery.artisphere.entities.User</class>
           	<class>com.skilldistillery.artisphere.entities.Exhibition</class>
        
@@ -18,7 +19,7 @@
 			<property name="jakarta.persistence.jdbc.user"
 				value="curator" />
 			<property name="jakarta.persistence.jdbc.password"
-				value="curatorART" />
+				value="curator" />
 			<property name="jakarta.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
 

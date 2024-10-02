@@ -1,64 +1,57 @@
 package com.skilldistillery.artisphere.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.time.LocalDateTime;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 class UserTest {
 
-    private User user;
+	private static EntityManagerFactory emf;
+	private EntityManager em;
+	private User user;
 
-    @BeforeAll
-    static void setUpBeforeClass() throws Exception {
-    }
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+		emf = Persistence.createEntityManagerFactory("JPAArtConnect");
+	}
 
-    @AfterAll
-    static void tearDownAfterClass() throws Exception {
-    }
+	@BeforeEach
+	void setUp() throws Exception {
+		em = emf.createEntityManager();
+		user = em.find(User.class, 1);
+	}
 
-    @BeforeEach
-    void setUp() throws Exception {
-       
-        user = new User();
-        user.setId(1);
-        user.setUsername("artlover92");
-        user.setEmail("artlover92@example.com");
-        user.setPassword("password1");
-        user.setRole("USER");
-        user.setCreatedAt(LocalDateTime.of(2023, 1, 10, 8, 23, 45));
-        user.setUpdatedAt(LocalDateTime.of(2024, 3, 20, 14, 10, 21));
-    }
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+		emf.close();
+	}
 
-    @AfterEach
-    void tearDown() throws Exception {
-        user = null; 
-    }
+	@AfterEach
+	void tearDown() throws Exception {
+		em.close();
+	}
 
-    @Test
-    void testUserFields() {
-       
-        assertEquals(1, user.getId());
-        assertEquals("artlover92", user.getUsername());
-        assertEquals("artlover92@example.com", user.getEmail());
-        assertEquals("password1", user.getPassword());
-        assertEquals("USER", user.getRole());
-        assertEquals(LocalDateTime.of(2023, 1, 10, 8, 23, 45), user.getCreatedAt());
-        assertEquals(LocalDateTime.of(2024, 3, 20, 14, 10, 21), user.getUpdatedAt());
-    }
+	@Test
+	void test_User_entity_mapping() {
+		assertNotNull(user);
+		assertEquals("gbetterton0", user.getUsername());
+		assertEquals("plestrange0@mapy.cz", user.getEmail());
+		assertEquals("user", user.getRole());
+		assertTrue(user.getEnabled());
+	}
 
-    @Test
-    void testUserDefaultConstructor() {
-        
-        User emptyUser = new User();
-        assertNotNull(emptyUser);
-        assertNull(emptyUser.getUsername());
-        assertNull(emptyUser.getEmail());
-        assertNull(emptyUser.getPassword());
-    }
+	@Test
+	void test_Museum_OneToMany_Exhibitions_mapping() {
+		assertNotNull(user);
+		assertNotNull(user.getArtworks());
+		assertTrue(user.getArtworks().size()>0);
+	}
 }

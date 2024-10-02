@@ -17,101 +17,113 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
-    private String username;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    private String email;
+	private String username;
 
-    private String password;
+	private String email;
 
-    private String role;
-    
-    private Boolean enabled;
+	private String password;
 
-    @CreationTimestamp
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+	private String role;
 
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-    
-    @JoinTable(name = "favorite_artwork", joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns =@JoinColumn(name="artwork_id"))
-    @ManyToMany
-    @JsonIgnore
-    private List<Artwork> favoriteArtworks;
+	private Boolean enabled;
 
-    
-    @JoinTable(name = "favorite_exhibition", joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns =@JoinColumn(name="exhibition_id"))
-    @ManyToMany
-    @JsonIgnore
-    private List<Exhibition> favoriteExhibitions;
-   
-    public int getId() {
-        return id;
-    }
+	@CreationTimestamp
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	@UpdateTimestamp
+	@Column(name = "updated_at")
+	private LocalDateTime updatedAt;
 
-    public String getUsername() {
-        return username;
-    }
+	@JoinTable(name = "favorite_artwork", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "artwork_id"))
+	@ManyToMany
+	@JsonIgnore
+	private List<Artwork> favoriteArtworks;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	@OneToMany(mappedBy="user")
+	@JsonIgnore
+	private List<Artwork> artworks;
 
-    public String getEmail() {
-        return email;
-    }
+	public List<Artwork> getArtworks() {
+		return artworks;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setArtworks(List<Artwork> artworks) {
+		this.artworks = artworks;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	@JoinTable(name = "favorite_exhibition", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "exhibition_id"))
+	@ManyToMany
+	@JsonIgnore
+	private List<Exhibition> favoriteExhibitions;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getRole() {
-        return role;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    
-    public Boolean getEnabled() {
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Boolean getEnabled() {
 		return enabled;
 	}
 
@@ -136,21 +148,22 @@ public class User {
 	}
 
 	@Override
-    public String toString() {
-        return "User [id=" + id + ", username=" + username + ", email=" + email + ", role=" + role + "]";
-    }
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", role=" + role + "]";
+	}
 
-  
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id;
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		User user = (User) o;
+		return id == user.id;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }
