@@ -6,7 +6,7 @@
           <img class="card-img-top" [src]="exhibitions.imageUrl" alt="Exhibition Image">
           <div class="card-body">
             <h5 class="card-title">{{ exhibitions.name }}</h5>
-            <button type="button" class="btn btn-primary" (click)="openModal(exhibitions)">View Details</button>
+             <!-- <button type="button" class="btn btn-primary" (click)="openModal(exhibitions)">View Details</button> --> 
           </div>
         </div>
       </div>
@@ -15,17 +15,5 @@
   
   
   
-  <ng-template #exhibitionsModal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title">{{ selectedExhibitions?.name }}</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>{{ selectedExhibitions?.description }}</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
-    </div>
+
 

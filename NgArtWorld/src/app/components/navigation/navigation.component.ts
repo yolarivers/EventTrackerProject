@@ -9,11 +9,10 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterLink, LogoutComponent, CommonModule],
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css'] 
+  styleUrl: './navigation.component.css'
 })
 export class NavigationComponent {
-  constructor(private auth: AuthService) {}
-
+constructor(private auth: AuthService) { }
   isLoggedIn() {
     return this.auth.checkLogin();
   }
