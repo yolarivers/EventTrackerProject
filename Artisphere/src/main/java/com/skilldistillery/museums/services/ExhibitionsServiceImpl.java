@@ -7,22 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.artisphere.entities.Exhibition;
-import com.skilldistillery.museums.repositories.ExhibitionRepository;
+import com.skilldistillery.museums.repositories.ExhibitionsRepository;
 
 @Service
-public class ExhibitionServiceImpl implements ExhibitionService {
+public class ExhibitionsServiceImpl implements ExhibitionsService {
 
     @Autowired
-    private ExhibitionRepository exhibitionRepository;
+    private ExhibitionsRepository exhibitionsRepository;
 
     @Override
-    public Exhibition saveExhibition(Exhibition exhibition) {
-        return exhibitionRepository.save(exhibition);
+    public Exhibition saveExhibitions(Exhibition exhibition) {
+        return exhibitionsRepository.save(exhibition);
     }
 
     @Override
-    public Exhibition getExhibitionById(int id) {
-        Optional<Exhibition> opt = exhibitionRepository.findById(id);
+    public Exhibition getExhibitionsById(int id) {
+        Optional<Exhibition> opt = exhibitionsRepository.findById(id);
         if (opt.isPresent()) {
             return opt.get();
         }
@@ -31,13 +31,13 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 
     @Override
     public List<Exhibition> getAllExhibitions() {
-        return exhibitionRepository.findAll();
+        return exhibitionsRepository.findAll();
     }
 
     @Override
-    public boolean deleteExhibition(int id) {
-        if (exhibitionRepository.existsById(id)) {
-            exhibitionRepository.deleteById(id);
+    public boolean deleteExhibitions(int id) {
+        if (exhibitionsRepository.existsById(id)) {
+            exhibitionsRepository.deleteById(id);
             return true;
         }
         return false;

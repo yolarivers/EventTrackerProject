@@ -1,4 +1,4 @@
-import { Museums } from "./museums";
+import { Museum } from "./museum";
 import { User } from "./user";
 
 export class Artwork {
@@ -6,7 +6,7 @@ export class Artwork {
   title: string;
   artist: string;
   user: User | null;
-  museums: Museums | null;
+  museums: Museum | null;
   creationYear: number;
   description: string;
   image: string;
@@ -18,7 +18,7 @@ export class Artwork {
     title: string = '',
     artist: string = '',
     user: User | null = null,
-    museums: Museums | null = null,
+    museums: Museum | null = null,
     creationYear: number = 0,
     description: string = '',
     image: string = '',

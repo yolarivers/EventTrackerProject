@@ -7,30 +7,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.artisphere.entities.Museum;
-import com.skilldistillery.museums.repositories.MuseumRepository;
+import com.skilldistillery.museums.repositories.MuseumsRepository;
 
 @Service
-public class MuseumServiceImpl implements MuseumService {
+public class MuseumsServiceImpl implements MuseumsService {
 
     @Autowired
-    private MuseumRepository museumRepo;
+    private MuseumsRepository museumRepo;
 
+    @Override
     public List<Museum> getAllMuseums() {
         return museumRepo.findAll();
     }
 
-    public Museum showMuseum(int museumId) {
-        Optional<Museum> optMuseum = museumRepo.findById(museumId);
-        if (optMuseum.isPresent()) {
-            return optMuseum.get();
-        }
-        return null; 
+    @Override
+    public Museum getMuseumById(int id) {
+        Optional<Museum> optMuseums = museumRepo.findById(id);
+        return optMuseums.orElse(null); 
     }
 
-    public Museum create(Museum newMuseum) {
-        return museumRepo.save(newMuseum);
+    @Override
+    public Museum saveMuseum(Museum museum) {
+        return museumRepo.save(museum);
     }
 
+    @Override
     public Museum update(int museumId, Museum updatingMuseum) {
         Optional<Museum> optMuseum = museumRepo.findById(museumId);
         if (optMuseum.isPresent()) {
@@ -47,44 +48,18 @@ public class MuseumServiceImpl implements MuseumService {
         return null; 
     }
 
-    public boolean delete(int museumId) {
-        if (museumRepo.existsById(museumId)) {
-            museumRepo.deleteById(museumId);
+    @Override
+    public boolean deleteMuseum(int id) {
+        if (museumRepo.existsById(id)) {
+            museumRepo.deleteById(id);
             return true;
         }
         return false;
     }
 
-    public Museum findById(int id) {
-        Optional<Museum> optMuseum = museumRepo.findById(id);
-        if (optMuseum.isPresent()) {
-            return optMuseum.get();
-        }
-        return null;  
-
-
-	
-	}
-
-	public static void main(String[] args) {
-		
-	}
-
 	@Override
-	public Museum saveMuseum(Museum museum) {
+	public Museum create(Museum newMuseum) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public Museum getMuseumById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean deleteMuseum(int id) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

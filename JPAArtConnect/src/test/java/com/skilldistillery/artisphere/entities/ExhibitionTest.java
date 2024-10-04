@@ -35,7 +35,7 @@ class ExhibitionTest {
 	}
 
 	@Test
-	void test_Exhibition_entity_mapping() {
+	void test_Exhibitions_entity_mapping() {
 		assertNotNull(exhibition);
 		assertEquals("installationEXPO", exhibition.getTitle());
 		assertEquals("accumsan odio", exhibition.getDescription());
@@ -46,8 +46,8 @@ class ExhibitionTest {
 	@Test
 	void test_Exhibition_ManyToOne_Museum_mapping() {
 		assertNotNull(exhibition);
-		assertNotNull(exhibition.getMuseum());
-		assertEquals(1, exhibition.getMuseum().getId());
+		assertNotNull(exhibition.getMuseums());
+		assertEquals(1, exhibition.getMuseums().getId());
 	}
 
 	@Test
@@ -57,13 +57,13 @@ class ExhibitionTest {
 	}
 
 	@Test
-	void test_CRUD_operations_on_Exhibition() {
-		Exhibition newExhibition = new Exhibition();
+	void test_CRUD_operations_on_Exhibitions() {
+		Exhibition newExhibitions = new Exhibition();
 
-		newExhibition.setTitle("Test Expo");
-		newExhibition.setDescription("Testing creation");
-		newExhibition.setStartDate(LocalDate.of(2025, 1, 1));
-		newExhibition.setEndDate(LocalDate.of(2025, 12, 31));
+		newExhibitions.setTitle("Test Expo");
+		newExhibitions.setDescription("Testing creation");
+		newExhibitions.setStartDate(LocalDate.of(2025, 1, 1));
+		newExhibitions.setEndDate(LocalDate.of(2025, 12, 31));
 
 	}
 }

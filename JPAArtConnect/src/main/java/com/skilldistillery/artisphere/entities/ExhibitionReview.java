@@ -60,11 +60,11 @@ public class ExhibitionReview {
         this.user = user;
     }
 
-    public Exhibition getExhibition() {
+    public Exhibition getExhibitions() {
         return exhibition;
     }
 
-    public void setExhibition(Exhibition exhibition) {
+    public void setExhibitions(Exhibition exhibition) {
         this.exhibition = exhibition;
     }
 

@@ -1,18 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { Museum } from '../../models/museum';
+import { MuseumsService } from '../../services/museums.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  imports:[CommonModule],
+  standalone: true,
   selector: 'app-museums',
-  templateUrl: './museums.component.html'
+  templateUrl: './museums.component.html',
 })
 export class MuseumsComponent implements OnInit {
+  museums: Museum[] = [];
 
-  museums = [
-    { id: 1, name: 'Louvre Museum', description: 'Famous museum in Paris', imageUrl: 'assets/louvre.jpg' },
-    { id: 2, name: 'The Met', description: 'Metropolitan Museum of Art in NYC', imageUrl: 'assets/met.jpg' },
-   { id: 3, name: 'British Museum', description: 'Museum in London', imageUrl: 'assets/british.jpg' },
-  ];
+  constructor(private museumsService: MuseumsService) {}
 
-  constructor() { }
-
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.loadMuseums();
+  }
+  loadMuseums() {
+    this.museumsService.getAllMuseums().subscribe(
+      (response) => {
+        this.museums = response;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 }

@@ -62,7 +62,7 @@ public class User {
 		this.artworks = artworks;
 	}
 
-	@JoinTable(name = "favorite_exhibition", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "exhibition_id"))
+	@JoinTable(name = "favorite_exhibitions", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "exhibitions_id"))
 	@ManyToMany
 	@JsonIgnore
 	private List<Exhibition> favoriteExhibitions;

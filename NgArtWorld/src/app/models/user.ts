@@ -1,5 +1,5 @@
 import { Artwork } from "./artwork";
-import { Exhibitions } from "./exhibitions";
+import { Exhibition } from "./exhibition";
 
 export class User {
   id: number;
@@ -12,7 +12,7 @@ export class User {
   updatedAt: string;
   favoriteArtworks: Artwork[];
   artworks: Artwork[];
-  favoriteExhibitions: Exhibitions[];
+  favoriteExhibitions: Exhibition[];
 
   constructor(
     id: number = 0,
@@ -25,7 +25,7 @@ export class User {
     updatedAt: string = '',
     favoriteArtworks: Artwork[] = [],
     artworks: Artwork[] = [],
-    favoriteExhibitions: Exhibitions[] = []
+    favoriteExhibitions: Exhibition[] = []
   ) {
     this.id = id;
     this.username = username;

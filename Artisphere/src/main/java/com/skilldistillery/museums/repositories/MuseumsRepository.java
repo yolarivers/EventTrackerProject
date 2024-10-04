@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.skilldistillery.artisphere.entities.Museum;
 
-public interface MuseumRepository extends JpaRepository<Museum, Integer> {
+public interface MuseumsRepository extends JpaRepository<Museum, Integer> {
 }

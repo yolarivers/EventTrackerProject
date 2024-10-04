@@ -1,10 +1,10 @@
-import { Exhibitions } from "./exhibitions";
+import { Exhibition } from "./exhibition";
 import { User } from "./user";
 
-export class ExhibitionsReview {
+export class ExhibitionReview {
   id: number;
   user: User | null;
-  exhibitions: Exhibitions | null;
+  exhibitions: Exhibition | null;
   rating: number;
   comment: string;
   createdAt: string;
@@ -13,7 +13,7 @@ export class ExhibitionsReview {
   constructor(
     id: number = 0,
     user: User | null = null,
-    exhibitions: Exhibitions | null = null,
+    exhibitions: Exhibition | null = null,
     rating: number = 0,
     comment: string = '',
     createdAt: string = '',
@@ -32,7 +32,7 @@ export class ExhibitionsReview {
     return `ExhibitionsReview [id=${this.id}, rating=${this.rating}, comment=${this.comment}]`;
   }
 
-  equals(other: ExhibitionsReview): boolean {
+  equals(other: ExhibitionReview): boolean {
     return this.id === other.id;
   }
 

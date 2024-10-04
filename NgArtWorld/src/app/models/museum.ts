@@ -1,6 +1,6 @@
-import { Exhibitions } from "./exhibitions";
+import { Exhibition } from "./exhibition";
 
-export class Museums {
+export class Museum {
   id: number;
   name: string;
   location: string;
@@ -9,7 +9,7 @@ export class Museums {
   imageUrl: string;
   createdAt: string;
   updatedAt: string;
-  exhibitions: Exhibitions[];
+  exhibitions: Exhibition[];
 
   constructor(
     id: number = 0,
@@ -20,7 +20,7 @@ export class Museums {
     imageUrl: string = '',
     createdAt: string = '',
     updatedAt: string = '',
-    exhibitions: Exhibitions[] = []
+    exhibitions: Exhibition[] = []
   ) {
     this.id = id;
     this.name = name;
@@ -37,7 +37,7 @@ export class Museums {
     return `Museums [id=${this.id}, name=${this.name}, location=${this.location}]`;
   }
 
-  equals(other: Museums): boolean {
+  equals(other: Museum): boolean {
     return this.id === other.id;
   }
 

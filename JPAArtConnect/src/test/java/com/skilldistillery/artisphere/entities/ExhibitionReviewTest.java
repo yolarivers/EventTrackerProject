@@ -40,29 +40,29 @@ class ExhibitionReviewTest {
 	}
 
 	@Test
-	void testExhibitionReviewFields() {
+	void testExhibitionsReviewFields() {
 		assertNotNull(review);
 		assertEquals(5, review.getRating());
 	}
 
 	@Test
-	void test_ExhibitionReview_entity_mapping() {
+	void test_ExhibitionsReview_entity_mapping() {
 		assertNotNull(review);
 		assertEquals(5, review.getRating());
 	}
 
 	@Test
-	void test_ExhibitionReview_ManyToOne_User_mapping() {
+	void test_ExhibitionsReview_ManyToOne_User_mapping() {
 		assertNotNull(review);
 		assertNotNull(review.getUser());
 		assertEquals(1, review.getUser().getId());
 	}
 
 	@Test
-	void test_ExhibitionReview_ManyToOne_Exhibition_mapping() {
+	void test_ExhibitionsReview_ManyToOne_Exhibitions_mapping() {
 		assertNotNull(review);
-		assertNotNull(review.getExhibition());
-		assertEquals(1, review.getExhibition().getId());
+		assertNotNull(review.getExhibitions());
+		assertEquals(1, review.getExhibitions().getId());
 	}
 
 }

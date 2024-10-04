@@ -1,12 +1,12 @@
 <div class="container mt-4">
     <h2 class="text-center">Art Museums</h2>
     <div class="row">
-      <div class="col-md-4" *ngFor="let museums of museums">
+      <div class="col-md-4" *ngFor="let museum of museums">
         <div class="card">
-          <img class="card-img-top" [src]="museums.imageUrl" alt="Museums Image">
+          <img class="card-img-top" [src]="museum.imageUrl" alt="Museums Image">
           <div class="card-body">
-            <h5 class="card-title">{{ museums.name }}</h5>
-            <p class="card-text">{{ museums.description }}</p>
+            <h5 class="card-title">{{ museum.name }}</h5>
+            <p class="card-text">{{ museum.description }}</p>
             
           </div>
         </div>

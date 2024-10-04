@@ -116,8 +116,8 @@ public class Museum {
         return exhibitions;
     }
 
-    public void setExhibitions(List<Exhibition> exhibitions) {
-        this.exhibitions = exhibitions;
+    public void setExhibitions(List<Exhibition> exhibition) {
+        this.exhibitions = exhibition;
     }
 
     

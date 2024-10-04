@@ -49,7 +49,7 @@ class UserTest {
 	}
 
 	@Test
-	void test_Museum_OneToMany_Exhibitions_mapping() {
+	void test_Museums_OneToMany_Exhibitions_mapping() {
 		assertNotNull(user);
 		assertNotNull(user.getArtworks());
 		assertTrue(user.getArtworks().size()>0);

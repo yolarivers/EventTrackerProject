@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Artwork } from '../models/artwork';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArtworkService {
 
-  private baseUrl = 'http://localhost:8085/api/artworks';  
+  private baseUrl = environment.baseUrl + 'api/artworks';  
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
@@ -33,17 +34,17 @@ export class ArtworkService {
   }
 
   createArtwork(newArtwork: Artwork, username: string): Observable<Artwork> {
-    const url = `${this.baseUrl}/create?username=${username}`;
+    const url = `${this.baseUrl}`;
     return this.http.post<Artwork>(url, newArtwork, this.getHttpOptions());
   }
 
   updateArtwork(artworkId: number, updatingArtwork: Artwork, username: string): Observable<Artwork> {
-    const url = `${this.baseUrl}/${artworkId}/update?username=${username}`;
+    const url = `${this.baseUrl}/${artworkId}`;
     return this.http.put<Artwork>(url, updatingArtwork, this.getHttpOptions());
   }
 
   deleteArtwork(artworkId: number, username: string): Observable<void> {
-    const url = `${this.baseUrl}/${artworkId}?username=${username}`;
+    const url = `${this.baseUrl}/${artworkId}`;
     return this.http.delete<void>(url, this.getHttpOptions());
   }
 }

@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.skilldistillery.artisphere.entities.Exhibition;
 
 
-public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer> {
+public interface ExhibitionsRepository extends JpaRepository<Exhibition, Integer> {
    
 }

@@ -85,11 +85,11 @@ public class Artwork {
 
 
 
-    public Museum getMuseum() {
+    public Museum getMuseums() {
         return museum;
     }
 
-    public void setMuseum(Museum museum) {
+    public void setMuseums(Museum museum) {
         this.museum = museum;
     }
 

@@ -60,8 +60,8 @@ class ArtworkTest {
 	@Test
 	void test_Artwork_ManyToOne_Museum_mapping() {
 		assertNotNull(artwork);
-		assertNotNull(artwork.getMuseum());
-		assertEquals(3, artwork.getMuseum().getId());
+		assertNotNull(artwork.getMuseums());
+		assertEquals(3, artwork.getMuseums().getId());
 	}
 
 	@Test

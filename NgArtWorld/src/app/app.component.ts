@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
 import { FooterComponent } from "./components/footer/footer.component";
+import { NavigationComponent } from "./components/navigation/navigation.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent],
+  imports: [RouterOutlet, FooterComponent, NavigationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -18,7 +19,7 @@ export class AppComponent {
   ) {}
   
   ngOnInit() {
-    this.tempTestDeleteMeLater(); // DELETE LATER!!!
+    
   }
   
   tempTestDeleteMeLater() {

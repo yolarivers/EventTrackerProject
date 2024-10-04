@@ -23,21 +23,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.skilldistillery.artisphere.entities.Exhibition;
-import com.skilldistillery.museums.services.ExhibitionService;
+import com.skilldistillery.museums.services.ExhibitionsService;
 
 @CrossOrigin({"*", "http://localhost/"})
 @RestController
-@RequestMapping("/api/exhibition")
-public class ExhibitionController {
+@RequestMapping("/api/exhibitions")
+public class ExhibitionsController {
 
 	@Autowired
-	private ExhibitionService exhibitionService;
+	private ExhibitionsService exhibitionsService;
 
 	@GetMapping("/test")
 	public ResponseEntity<String> test() {
 		return new ResponseEntity<>("Test endpoint works!", HttpStatus.OK);
 	}
-
 
 	private final String uploadDir = "src/main/webapp/uploads/images/";
 
@@ -51,61 +50,59 @@ public class ExhibitionController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		
-		Exhibition newExhibition = new Exhibition();
-		newExhibition.setTitle(title);
-		newExhibition.setStartDate(LocalDate.parse(startDate));
-		newExhibition.setEndDate(LocalDate.parse(endDate));
-		newExhibition.setDescription(description);
-		newExhibition.setImageUrl("/uploads/images/" + fileName);
+		Exhibition newExhibitions = new Exhibition();
+		newExhibitions.setTitle(title);
+		newExhibitions.setStartDate(LocalDate.parse(startDate));
+		newExhibitions.setEndDate(LocalDate.parse(endDate));
+		newExhibitions.setDescription(description);
+		newExhibitions.setImageUrl("/uploads/images/" + fileName);
 
-		exhibitionService.saveExhibition(newExhibition);
+		exhibitionsService.saveExhibitions(newExhibitions);
 
-		return new ResponseEntity<>(newExhibition, HttpStatus.CREATED);
+		return new ResponseEntity<>(newExhibitions, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Exhibition> updateExhibition(@PathVariable int id,
+	public ResponseEntity<Exhibition> updateExhibitions(@PathVariable int id,
 			@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam("title") String title,
 			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
 			@RequestParam("description") String description) {
 
-		Exhibition existingExhibition = exhibitionService.getExhibitionById(id);
-		if (existingExhibition != null) {
-			existingExhibition.setTitle(title);
-			existingExhibition.setStartDate(LocalDate.parse(startDate));
-			existingExhibition.setEndDate(LocalDate.parse(endDate));
-			existingExhibition.setDescription(description);
+		Exhibition existingExhibitions = exhibitionsService.getExhibitionsById(id);
+		if (existingExhibitions != null) {
+			existingExhibitions.setTitle(title);
+			existingExhibitions.setStartDate(LocalDate.parse(startDate));
+			existingExhibitions.setEndDate(LocalDate.parse(endDate));
+			existingExhibitions.setDescription(description);
 
 			if (file != null && !file.isEmpty()) {
-				
+				String absoluteImagePath = "src/main/webapp" + existingExhibitions.getImageUrl(); 
 				try {
-					Files.deleteIfExists(Paths.get(existingExhibition.getImageUrl()));
+					Files.deleteIfExists(Paths.get(absoluteImagePath));
 				} catch (IOException e) {
 					e.printStackTrace();
 					return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 
-			
 				String fileName = saveFile(file);
 				if (fileName == null) {
 					return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 				}
-				existingExhibition.setImageUrl("/uploads/images/" + fileName);
+				existingExhibitions.setImageUrl("/uploads/images/" + fileName);
 			}
 
-			exhibitionService.saveExhibition(existingExhibition);
-			return new ResponseEntity<>(existingExhibition, HttpStatus.OK);
+			exhibitionsService.saveExhibitions(existingExhibitions);
+			return new ResponseEntity<>(existingExhibitions, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteExhibition(@PathVariable int id) {
-		boolean isDeleted = exhibitionService.deleteExhibition(id);
+	public ResponseEntity<String> deleteExhibitions(@PathVariable int id) {
+		boolean isDeleted = exhibitionsService.deleteExhibitions(id);
 		if (isDeleted) {
-			return new ResponseEntity<>("Exhibition deleted successfully", HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>("Exhibition deleted successfully", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("Exhibition not found", HttpStatus.NOT_FOUND);
 		}
@@ -113,20 +110,19 @@ public class ExhibitionController {
 
 	@GetMapping
 	public ResponseEntity<List<Exhibition>> getAllExhibitions() {
-		List<Exhibition> exhibitions = exhibitionService.getAllExhibitions();
-		return new ResponseEntity<>(exhibitions, HttpStatus.OK);
+		List<Exhibition> exhibition = exhibitionsService.getAllExhibitions();
+		return new ResponseEntity<>(exhibition, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Exhibition> getExhibitionById(@PathVariable int id) {
-		Exhibition exhibition = exhibitionService.getExhibitionById(id);
+	public ResponseEntity<Exhibition> getExhibitionsById(@PathVariable int id) {
+		Exhibition exhibition = exhibitionsService.getExhibitionsById(id);
 		if (exhibition != null) {
 			return new ResponseEntity<>(exhibition, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
 
 	private String saveFile(MultipartFile file) {
 		String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();

@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Exhibitions } from '../models/exhibitions';
+import { Exhibition } from '../models/exhibition';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExhibitionsService {
 
-  private baseUrl = 'http://localhost:8087/api/exhibitions';  
+  private baseUrl = environment.baseUrl + 'api/exhibitions';  
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
@@ -23,17 +24,17 @@ export class ExhibitionsService {
     return options;
   }
 
-  getAllExhibitions(): Observable<Exhibitions[]> {
-    return this.http.get<Exhibitions[]>(this.baseUrl, this.getHttpOptions());
+  getAllExhibitions(): Observable<Exhibition[]> {
+    return this.http.get<Exhibition[]>(this.baseUrl, this.getHttpOptions());
   }
 
-  getExhibitionsById(exhibitionId: number): Observable<Exhibitions> {
+  getExhibitionsById(exhibitionId: number): Observable<Exhibition> {
     const url = `${this.baseUrl}/${exhibitionId}`;
-    return this.http.get<Exhibitions>(url, this.getHttpOptions());
+    return this.http.get<Exhibition>(url, this.getHttpOptions());
   }
 
-  saveExhibitions(newExhibition: Exhibitions): Observable<Exhibitions> {
-    return this.http.post<Exhibitions>(this.baseUrl, newExhibition, this.getHttpOptions());
+  saveExhibitions(newExhibition: Exhibition): Observable<Exhibition> {
+    return this.http.post<Exhibition>(this.baseUrl, newExhibition, this.getHttpOptions());
   }
 
   deleteExhibitions(exhibitionId: number): Observable<void> {

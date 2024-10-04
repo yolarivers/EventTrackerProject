@@ -41,7 +41,7 @@ class MuseumTest {
 	}
 
 	@Test
-	void test_Museum_entity_mapping() {
+	void test_Museums_entity_mapping() {
 		assertNotNull(museum);
 		assertEquals("Waters-Effertz", museum.getName());
 		assertEquals("57 Portage Alley", museum.getLocation());
@@ -54,21 +54,21 @@ class MuseumTest {
 	}
 
 	@Test
-	void test_Museum_OneToMany_Exhibitions_mapping() {
+	void test_Museums_OneToMany_Exhibitions_mapping() {
 		assertNotNull(museum);
 		assertNotNull(museum.getExhibitions());
 		assertTrue(museum.getExhibitions().size() > 0);
 	}
 
 	@Test
-	void test_CRUD_operations_on_Museum() {
+	void test_CRUD_operations_on_Museums() {
 
-		Museum newMuseum = new Museum();
-		newMuseum.setName("Test Museum");
-		newMuseum.setLocation("123 Test Street");
-		newMuseum.setDescription("This is a test museum.");
-		newMuseum.setWebsiteUrl("http://testmuseum.com");
-		newMuseum.setImageUrl("http://dummyimage.com/test.png");
+		Museum newMuseums = new Museum();
+		newMuseums.setName("Test Museum");
+		newMuseums.setLocation("123 Test Street");
+		newMuseums.setDescription("This is a test museum.");
+		newMuseums.setWebsiteUrl("http://testmuseum.com");
+		newMuseums.setImageUrl("http://dummyimage.com/test.png");
 
 	}
 }

@@ -3,8 +3,6 @@ package com.skilldistillery.artisphere.entities;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -46,7 +44,7 @@ public class Exhibition {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
-    @JoinTable(name = "exhibition_has_artwork", joinColumns = @JoinColumn(name="exhibition_id"),inverseJoinColumns =@JoinColumn(name="artwork_id"))
+    @JoinTable(name = "exhibitions_has_artwork", joinColumns = @JoinColumn(name="exhibition_id"),inverseJoinColumns =@JoinColumn(name="artwork_id"))
     @ManyToMany
     @JsonIgnore
     private List<Artwork> artworks;
@@ -69,11 +67,11 @@ public class Exhibition {
 		this.title = title;
 	}
 
-	public Museum getMuseum() {
+	public Museum getMuseums() {
 		return museum;
 	}
 
-	public void setMuseum(Museum museum) {
+	public void setMuseums(Museum museum) {
 		this.museum = museum;
 	}
 

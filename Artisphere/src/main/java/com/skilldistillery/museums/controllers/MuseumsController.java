@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.artisphere.entities.Museum;
-import com.skilldistillery.museums.services.MuseumService;
+import com.skilldistillery.museums.services.MuseumsService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,36 +20,32 @@ import jakarta.servlet.http.HttpServletResponse;
 @CrossOrigin({"*", "http://localhost/"})
 @RestController
 @RequestMapping("api")
-public class MuseumController {
+public class MuseumsController {
     
     @Autowired
-    private MuseumService museumService;
+    private MuseumsService museumsService;
 
-    // Get all museums
     @GetMapping("museums")
-    public List<Museum> getMuseumList() {
-        return museumService.getAllMuseums();
+    public List<Museum> getMuseumsList() {
+        return museumsService.getAllMuseums();
     }
 
-    // Get a single museum by ID
-    @GetMapping("museums/{museumId}")
-    public Museum showMuseum(@PathVariable("museumId") Integer museumId, HttpServletResponse res) {
-        Museum museum = museumService.getMuseumById(museumId);
+    @GetMapping("museums/{museumsId}")
+    public Museum getMuseumById(@PathVariable("museumsId") Integer museumsId, HttpServletResponse res) {
+        Museum museum = museumsService.getMuseumById(museumsId);
         if (museum == null) {
             res.setStatus(404);
         }
         return museum;
     }
 
-    // Create a new museum
     @PostMapping("museums")
     public Museum createMuseum(@RequestBody Museum newMuseum, HttpServletRequest req, HttpServletResponse res) {
         try {
-            newMuseum = museumService.create(newMuseum);
+            newMuseum = museumsService.create(newMuseum);
             res.setStatus(201);
             res.setHeader("Location", req.getRequestURL().append("/").append(newMuseum.getId()).toString());
         } catch (Exception e) {
-            e.printStackTrace();
             res.setStatus(400);
         }
         return newMuseum;

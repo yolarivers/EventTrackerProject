@@ -3,9 +3,9 @@ package com.skilldistillery.museums.services;
 import java.util.List;
 import com.skilldistillery.artisphere.entities.Exhibition;
 
-public interface ExhibitionService {
-    Exhibition saveExhibition(Exhibition exhibition);
-    Exhibition getExhibitionById(int id);
+public interface ExhibitionsService {
+    Exhibition saveExhibitions(Exhibition exhibition);
+    Exhibition getExhibitionsById(int id);
     List<Exhibition> getAllExhibitions();
-    boolean deleteExhibition(int id);
+    boolean deleteExhibitions(int id);
 }
