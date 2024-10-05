@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
 })
 
 export class LoginComponent {
@@ -28,7 +29,7 @@ constructor(private auth: AuthService, private router: Router) { }
  
         this.auth.login(loginUser.value.username, loginUser.value.password).subscribe({
           next: (loggedInUser) => {
-            this.router.navigateByUrl('/todo');
+            this.router.navigateByUrl('/museums');
           },
           error: (problem) => {
             console.error('RegisterComponent.register(): Error logging in user:');

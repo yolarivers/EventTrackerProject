@@ -16,4 +16,4 @@ constructor(private auth: AuthService) { }
   isLoggedIn() {
     return this.auth.checkLogin();
   }
-}
+} 

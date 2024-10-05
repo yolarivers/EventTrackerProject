@@ -1,32 +1,33 @@
 <div class="container mt-4">
-    <h2 class="text-center">Artworks</h2>
-    <div class="row">
-      <div class="col-md-4" *ngFor="let artwork of artworks">
-        <div class="card">
-          <img class="card-img-top" [src]="artwork.imageUrl" alt="{{ artwork.name }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ artwork.name }}</h5>
-            <button type="button" class="btn btn-primary" (click)="openArtworkDetails(artwork)">View Details</button>
-          </div>
+  <h2 class="text-center">Artworks</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let artwork of artworks">
+      <div class="card">
+        <img class="card-img-top" [src]="artwork.image" alt="Artwork Image">
+        <div class="card-body">
+          <h5 class="card-title">{{ artwork.title }}</h5>
+          <p class="card-text">{{ artwork.description }}</p>
+          <button type="button" class="btn btn-primary" (click)="openArtworkDetails(artwork)">View Details</button>
         </div>
       </div>
     </div>
-  
-  
-    <ng-template #artworkModal let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">{{ selectedArtwork?.name }}</h4>
-        <button type="button" class="close" aria-label="Close" (click)="closeArtworkDetails()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>{{ selectedArtwork?.description }}</p>
-        <img [src]="selectedArtwork?.imageUrl" class="img-fluid" alt="{{ selectedArtwork?.name }}">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeArtworkDetails()">Close</button>
-      </div>
-    </ng-template>
   </div>
+
   
+  <ng-template #artworkModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{ selectedArtwork?.title }}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="closeArtworkDetails()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>{{ selectedArtwork?.description }}</p>
+      <img [src]="selectedArtwork?.image" class="img-fluid" alt="{{ selectedArtwork?.title }}">
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="closeArtworkDetails()">Close</button>
+    </div>
+  </ng-template>
+</div>
+

@@ -1,19 +1,42 @@
-<div class="container mt-4">
-    <h2 class="text-center">Current Exhibitions</h2>
-    <div class="row">
-      <div class="col-md-4" *ngFor="let exhibitions of exhibitions">
-        <div class="card">
-          <img class="card-img-top" [src]="exhibitions.imageUrl" alt="Exhibition Image">
-          <div class="card-body">
-            <h5 class="card-title">{{ exhibitions.name }}</h5>
-             <!-- <button type="button" class="btn btn-primary" (click)="openModal(exhibitions)">View Details</button> --> 
-          </div>
+<div class="container mt-4" *ngIf="!newExhibition">
+  <h2 class="text-center">Art Exhibitions</h2>
+  <div class="text-center">
+    <button class="btn btn-primary" (click)="showNewExhibitionForm()">Add Exhibition</button>
+  </div>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let exhibition of exhibitions">
+      <div class="card">
+        <img class="card-img-top" [src]="exhibition.imageUrl" alt="Exhibition Image">
+        <div class="card-body">
+          <h5 class="card-title">{{ exhibition.title }}</h5>
+          <p class="card-text">{{ exhibition.description }}</p>
         </div>
       </div>
     </div>
   </div>
-  
-  
-  
+</div>
+<div class="container mt-4" *ngIf="newExhibition">
+<h2 class="text-center">Add New Exhibition</h2>
+<div class="row">
+  <div class="col-md-6">
+    <form (ngSubmit)="addExhibition(newExhibition)">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" [(ngModel)]="newExhibition.title" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" name="description" [(ngModel)]="newExhibition.description" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="museums">Museums</label>
+        <select class="form-select" id="description" name="museums" [(ngModel)]="newExhibition.museum.id" required>
 
-
+          <option *ngFor="let museum of museums" [value]="museum.id">{{ museum.name }}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Exhibition</button>
+     </form>
+     </div>
+     </div>
+      </div>

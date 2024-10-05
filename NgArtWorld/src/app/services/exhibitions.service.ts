@@ -34,6 +34,7 @@ export class ExhibitionsService {
   }
 
   saveExhibitions(newExhibition: Exhibition): Observable<Exhibition> {
+    console.log(newExhibition);
     return this.http.post<Exhibition>(this.baseUrl, newExhibition, this.getHttpOptions());
   }
 

@@ -4,7 +4,7 @@ import { Museum } from "./museum";
 export class Exhibition {
   id: number;
   title: string;
-  museums: Museum | null;
+  museum: Museum;
   description: string;
   startDate: string;
   endDate: string;
@@ -16,7 +16,7 @@ export class Exhibition {
   constructor(
     id: number = 0,
     title: string = '',
-    museums: Museum | null = null,
+    museums: Museum = new Museum(),
     description: string = '',
     startDate: string = '',
     endDate: string = '',
@@ -27,7 +27,7 @@ export class Exhibition {
   ) {
     this.id = id;
     this.title = title;
-    this.museums = museums;
+    this.museum = museums;
     this.description = description;
     this.startDate = startDate;
     this.endDate = endDate;

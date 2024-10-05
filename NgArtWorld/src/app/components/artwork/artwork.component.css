@@ -2,3 +2,18 @@
     margin-bottom: 20px;
   }
   
+  .star-rating i {
+    font-size: 24px;
+    color: #ddd;
+    cursor: pointer;
+  }
+  
+  .star-rating i.filled {
+    color: gold;
+  }
+  
+  .star-rating i:hover,
+  .star-rating i:hover ~ i {
+    color: gold;
+  }
+  

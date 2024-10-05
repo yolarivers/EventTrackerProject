@@ -1,51 +1,64 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-
-interface Artwork {
-  id: number;
-  name: string;
-  description: string;
-  imageUrl: string;
-}
+import { Artwork } from '../../models/artwork'; 
+import { ArtworkService } from '../../services/artwork.service';
 
 @Component({
+  imports: [CommonModule],
+  standalone: true,
   selector: 'app-artwork',
   templateUrl: './artwork.component.html',
   styleUrls: ['./artwork.component.css']
 })
 export class ArtworkComponent implements OnInit {
 
-  artworks: Artwork[] = [
-    {
-      id: 1,
-      name: 'Starry Night',
-      description: 'A famous painting by Vincent van Gogh.',
-      imageUrl: 'assets/starry-night.jpg'
-    },
-    {
-      id: 2,
-      name: 'The Persistence of Memory',
-      description: 'A surreal artwork by Salvador Dalí.',
-      imageUrl: 'assets/persistence-of-memory.jpg'
-    },
-    {
-      id: 3,
-      name: 'Mona Lisa',
-      description: 'A world-renowned painting by Leonardo da Vinci.',
-      imageUrl: 'assets/mona-lisa.jpg'
-    }
-  ];
 
+  artworks: Artwork[] = [];
   selectedArtwork: Artwork | null = null;
 
-  constructor() { }
 
-  ngOnInit(): void { }
+  rating: number = 0;
+  comments: string[] = [];
+  newComment: string = '';
 
+  constructor(private artworkService: ArtworkService) {}
+
+  ngOnInit(): void {
+    this.loadArtworks();
+  }
+
+  
+  loadArtworks(): void {
+    this.artworkService.getAllArtworks().subscribe(
+      (response) => {
+        this.artworks = response;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  
   openArtworkDetails(artwork: Artwork): void {
     this.selectedArtwork = artwork;
   }
 
+
   closeArtworkDetails(): void {
     this.selectedArtwork = null;
+  }
+
+
+  rateArtwork(rating: number): void {
+    this.rating = rating;
+  }
+
+
+  addComment(): void {
+    if (this.newComment.trim()) {
+      this.comments.push(this.newComment);
+      this.newComment = ''; 
+    }
   }
 }

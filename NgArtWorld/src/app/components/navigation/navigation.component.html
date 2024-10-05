@@ -8,10 +8,16 @@
     <a class="navbar-brand" [routerLink]="['home']">Home</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
   
-  <li class="nav-item" *ngIf="!isLoggedIn()">
+  <li class="nav-item" >
             <a class="nav-link" [routerLink]="['museums']">Museum</a>
+
           </li>
-  <li class="nav-item" *ngIf="!isLoggedIn()">
+          <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['artwork']">Artwork</a>
+                  </li>
+
+          
+  <li class="nav-item">
             <a class="nav-link" [routerLink]="['exhibitions']">Exhibitions</a>
           </li>
   
