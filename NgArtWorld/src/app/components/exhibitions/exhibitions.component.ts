@@ -18,9 +18,9 @@ export class ExhibitionsComponent implements OnInit {
   selectedExhibition: Exhibition | null = null;
   newExhibition: Exhibition | null = null;
 
-  constructor(private exhibitionsService: ExhibitionsService,
+  constructor(
+    private exhibitionsService: ExhibitionsService,
     private museumService: MuseumsService
-
   ) {}
 
   ngOnInit(): void {
@@ -49,9 +49,12 @@ export class ExhibitionsComponent implements OnInit {
       }
     );
   }
+
   showNewExhibitionForm() {
     this.newExhibition = new Exhibition();
+    this.newExhibition.museum = new Museum(); 
   }
+
   addExhibition(exhibition: Exhibition) {
     this.exhibitionsService.saveExhibitions(exhibition).subscribe({
       next: (response) => {
@@ -62,5 +65,10 @@ export class ExhibitionsComponent implements OnInit {
         console.error(error);
       },
     });
+  }
+
+  openModal(exhibition: Exhibition) {
+    this.selectedExhibition = exhibition;
+   
   }
 }

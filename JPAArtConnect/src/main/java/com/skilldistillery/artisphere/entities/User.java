@@ -1,6 +1,7 @@
 package com.skilldistillery.artisphere.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -134,6 +135,17 @@ public class User {
 	public List<Artwork> getFavoriteArtworks() {
 		return favoriteArtworks;
 	}
+	
+	
+	public void addFavoriteArtwork(Artwork artwork) {
+	    if (favoriteArtworks == null) favoriteArtworks = new ArrayList<>();
+	    favoriteArtworks.add(artwork);
+	}
+
+	public void removeFavoriteArtwork(Artwork artwork) {
+	    if (favoriteArtworks != null) favoriteArtworks.remove(artwork);
+	}
+
 
 	public void setFavoriteArtworks(List<Artwork> favoriteArtworks) {
 		this.favoriteArtworks = favoriteArtworks;
@@ -149,7 +161,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", email=" + email + ", role=" + role + "]";
+	    return "User [id=" + id + ", username=" + username + ", email=" + email 
+	           + ", role=" + role + ", enabled=" + enabled + ", createdAt=" + createdAt + "]";
 	}
 
 	@Override

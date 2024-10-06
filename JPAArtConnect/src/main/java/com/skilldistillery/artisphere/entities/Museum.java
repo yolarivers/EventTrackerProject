@@ -1,6 +1,7 @@
 package com.skilldistillery.artisphere.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -115,6 +116,19 @@ public class Museum {
     public List<Exhibition> getExhibitions() {
         return exhibitions;
     }
+    
+    public void addExhibition(Exhibition exhibition) {
+        if (exhibitions == null) exhibitions = new ArrayList<>();
+        exhibitions.add(exhibition);
+        exhibition.setMuseum(this);
+    }
+
+    public void removeExhibition(Exhibition exhibition) {
+        if (exhibitions != null) exhibitions.remove(exhibition);
+        exhibition.setMuseum(null);
+    }
+
+    
 
     public void setExhibitions(List<Exhibition> exhibition) {
         this.exhibitions = exhibition;
@@ -123,8 +137,9 @@ public class Museum {
     
     @Override
     public String toString() {
-        return "Museum [id=" + id + ", name=" + name + ", location=" + location + "]";
+        return "Museum [id=" + id + ", name=" + name + ", location=" + location + ", websiteUrl=" + websiteUrl + "]";
     }
+
 
  
     @Override

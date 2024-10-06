@@ -54,7 +54,7 @@ public class ArtworkServiceImpl implements ArtworkService {
 			managedArtwork.setTitle(updatingArtwork.getTitle());
 			managedArtwork.setArtist(updatingArtwork.getArtist());
 			managedArtwork.setDescription(updatingArtwork.getDescription());
-			managedArtwork.setImage(updatingArtwork.getImage());
+			managedArtwork.setImageUrl(updatingArtwork.getImageUrl());
 			managedArtwork.setCreationYear(updatingArtwork.getCreationYear());
 
 			return artworkRepo.save(managedArtwork);

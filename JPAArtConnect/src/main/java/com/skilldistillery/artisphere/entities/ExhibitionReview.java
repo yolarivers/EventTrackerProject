@@ -6,6 +6,8 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,11 +23,13 @@ public class ExhibitionReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
+    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "exhibition_id")
     private Exhibition exhibition;
@@ -75,6 +79,20 @@ public class ExhibitionReview {
     public void setRating(int rating) {
         this.rating = rating;
     }
+    
+    
+    public void updateRating(int newRating) {
+        if (newRating >= 1 && newRating <= 5) {
+            this.rating = newRating;
+        }
+    }
+
+    public void updateComment(String newComment) {
+        if (newComment != null && !newComment.trim().isEmpty()) {
+            this.comment = newComment;
+        }
+    }
+
 
     public String getComment() {
         return comment;
@@ -103,8 +121,11 @@ public class ExhibitionReview {
   
     @Override
     public String toString() {
-        return "ExhibitionReview [id=" + id + ", rating=" + rating + ", comment=" + comment + "]";
+        return "ExhibitionReview [id=" + id + ", user=" + (user != null ? user.getUsername() : "null")
+               + ", exhibition=" + (exhibition != null ? exhibition.getTitle() : "null")
+               + ", rating=" + rating + ", comment=" + comment + "]";
     }
+
 
   
     @Override
@@ -113,10 +134,12 @@ public class ExhibitionReview {
         if (o == null || getClass() != o.getClass()) return false;
         ExhibitionReview exhibitionReview = (ExhibitionReview) o;
         return id == exhibitionReview.id;
+        
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+    	return Objects.hash(user, exhibition, createdAt);
     }
 }

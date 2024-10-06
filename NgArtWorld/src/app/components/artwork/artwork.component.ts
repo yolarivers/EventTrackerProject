@@ -1,64 +1,56 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Artwork } from '../../models/artwork'; 
+import { Artwork } from '../../models/artwork';
 import { ArtworkService } from '../../services/artwork.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; 
 
 @Component({
-  imports: [CommonModule],
   standalone: true,
   selector: 'app-artwork',
   templateUrl: './artwork.component.html',
-  styleUrls: ['./artwork.component.css']
+  styleUrls: ['./artwork.component.css'],
+  imports: [CommonModule, FormsModule]
 })
 export class ArtworkComponent implements OnInit {
-
-
-  artworks: Artwork[] = [];
+  Artworks: Artwork[] = [];  // Updated variable name to match across the component
   selectedArtwork: Artwork | null = null;
-
-
-  rating: number = 0;
-  comments: string[] = [];
-  newComment: string = '';
+  artworkRating: number = 0;
+  artworkComments: string[] = [];
+  commentText: string = '';
 
   constructor(private artworkService: ArtworkService) {}
 
   ngOnInit(): void {
-    this.loadArtworks();
+    this.loadArtwork();
   }
 
-  
-  loadArtworks(): void {
+  loadArtwork(): void {
     this.artworkService.getAllArtworks().subscribe(
-      (response) => {
-        this.artworks = response;
+      (response: Artwork[]) => {
+        this.Artworks = response;  // Ensure that the API response is correctly set to Artworks
       },
-      (error) => {
-        console.error(error);
+      (error: any) => {
+        console.error('Error fetching art collection:', error);
       }
     );
   }
 
-  
-  openArtworkDetails(artwork: Artwork): void {
+  showArtworkDetails(artwork: Artwork): void {
     this.selectedArtwork = artwork;
   }
 
-
-  closeArtworkDetails(): void {
+  closeArtworkModal(): void {
     this.selectedArtwork = null;
   }
 
-
   rateArtwork(rating: number): void {
-    this.rating = rating;
+    this.artworkRating = rating;
   }
 
-
-  addComment(): void {
-    if (this.newComment.trim()) {
-      this.comments.push(this.newComment);
-      this.newComment = ''; 
+  submitComment(): void {
+    if (this.commentText.trim()) {
+      this.artworkComments.push(this.commentText);
+      this.commentText = '';
     }
   }
 }

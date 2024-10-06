@@ -1,0 +1,98 @@
+header {
+    font-family: 'Times New Roman', serif;
+    margin-bottom: 20px;
+  }
+  
+  .navbar {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  .navbar-collapse {
+    justify-content: center;
+  }
+  
+  .logo {
+    height: 50px;
+    width: auto;
+  }
+  
+  .nav-link {
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background-color: #e2e6ea;
+  }
+
+
+
+  .col-4.text-end {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center; 
+    }
+
+    .col-4.text-end {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+      
+      .navbar-nav {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        gap: 20px;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .nav-item .nav-link {
+        padding: 0 10px;
+        font-size: 16px;
+        text-decoration: none;
+      }
+      
+      .navbar-toggler {
+        border: none;
+        outline: none;
+      }
+      
+   
+      
+      
+    
+      
+      @media (max-width: 576px) {
+        .navbar-nav {
+          flex-direction: column;
+          text-align: center;
+        }
+      
+        .col-4.text-end {
+          justify-content: center;
+        }
+      }
+      
+      .logo {
+        height: 50px;
+        width: auto;
+      }
+      
+      .nav-link {
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+      
+      .nav-link:hover {
+        background-color: #e2e6ea;
+      }
+      
+      header {
+        margin-bottom: 20px;
+      }
+      

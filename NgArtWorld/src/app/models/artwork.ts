@@ -9,7 +9,7 @@ export class Artwork {
   museums: Museum | null;
   creationYear: number;
   description: string;
-  image: string;
+  imageUrl: string;
   createdAt: string;
   updatedAt: string;
 
@@ -21,7 +21,7 @@ export class Artwork {
     museums: Museum | null = null,
     creationYear: number = 0,
     description: string = '',
-    image: string = '',
+    imageUrl: string = '',
     createdAt: string = '',
     updatedAt: string = ''
   ) {
@@ -32,7 +32,7 @@ export class Artwork {
     this.museums = museums;
     this.creationYear = creationYear;
     this.description = description;
-    this.image = image;
+    this.imageUrl = imageUrl;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }

@@ -38,8 +38,9 @@ public class Artwork {
     private int creationYear;
 
     private String description;
-
-    private String image;
+    
+    @Column(name = "image_url")
+    private String imageUrl;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -85,11 +86,11 @@ public class Artwork {
 
 
 
-    public Museum getMuseums() {
+    public Museum getMuseum() {
         return museum;
     }
 
-    public void setMuseums(Museum museum) {
+    public void setMuseum(Museum museum) {
         this.museum = museum;
     }
 
@@ -109,13 +110,21 @@ public class Artwork {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+    public void updateDescription(String newDescription) {
+        if (newDescription != null && !newDescription.trim().isEmpty()) {
+            this.description = newDescription;
+        }
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    
+    public String getImageUrl() {
+        return imageUrl;
     }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
@@ -136,8 +145,10 @@ public class Artwork {
   
     @Override
     public String toString() {
-        return "Artwork [id=" + id + ", title=" + title + ", artist=" + artist + ", creationYear=" + creationYear + "]";
+        return "Artwork [id=" + id + ", title=" + title + ", artist=" + artist + 
+               ", creationYear=" + creationYear + ", museum=" + (museum != null ? museum.getName() : "null") + "]";
     }
+
 
   
     @Override
@@ -150,7 +161,7 @@ public class Artwork {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(title, artist, creationYear);
     }
     
     

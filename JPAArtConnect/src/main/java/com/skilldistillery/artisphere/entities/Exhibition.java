@@ -2,7 +2,10 @@ package com.skilldistillery.artisphere.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -67,11 +70,11 @@ public class Exhibition {
 		this.title = title;
 	}
 
-	public Museum getMuseums() {
+	public Museum getMuseum() {
 		return museum;
 	}
 
-	public void setMuseums(Museum museum) {
+	public void setMuseum(Museum museum) {
 		this.museum = museum;
 	}
 
@@ -103,8 +106,8 @@ public class Exhibition {
 		return imageUrl;
 	}
 
-	public void setImageUrl(String eventImage) {
-		this.imageUrl = eventImage;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -129,6 +132,42 @@ public class Exhibition {
 
 	public void setArtworks(List<Artwork> artworks) {
 		this.artworks = artworks;
+	}
+	
+	public void addArtwork(Artwork artwork) {
+	    if (artworks == null) artworks = new ArrayList<>();
+	    if (!artworks.contains(artwork)) {
+	        artworks.add(artwork);
+	    }
+	}
+
+
+	public void removeArtwork(Artwork artwork) {
+	    if (artworks != null) artworks.remove(artwork);
+	}
+
+
+	@Override
+	public String toString() {
+	    return "Exhibition [id=" + id + ", title=" + title + ", museum=" 
+	           + (museum != null ? museum.getName() : "null") + ", startDate=" + startDate 
+	           + ", endDate=" + endDate + ", description=" + description + "]";
+	}
+
+
+	
+	@Override
+	public boolean equals(Object o) {
+	    if (this == o) return true;
+	    if (o == null || getClass() != o.getClass()) return false;
+	    Exhibition exhibition = (Exhibition) o;
+	    return id == exhibition.id;
+	          
+	}
+
+	@Override
+	public int hashCode() {
+	    return Objects.hash(title, startDate, endDate);
 	}
 
 	

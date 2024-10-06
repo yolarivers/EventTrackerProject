@@ -1,5 +1,14 @@
-.card {
+
+
+
+
+
+  .card {
     margin-bottom: 20px;
+  }
+  
+  .star-rating {
+    margin-top: 10px;
   }
   
   .star-rating i {
@@ -15,5 +24,19 @@
   .star-rating i:hover,
   .star-rating i:hover ~ i {
     color: gold;
+  }
+  
+  .comment-section {
+    margin-top: 15px;
+  }
+  
+  .comment-list {
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  .btn {
+    position: relative;
+    z-index: 10;
   }
   

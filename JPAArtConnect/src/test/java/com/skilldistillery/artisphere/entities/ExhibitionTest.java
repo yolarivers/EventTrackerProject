@@ -46,8 +46,8 @@ class ExhibitionTest {
 	@Test
 	void test_Exhibition_ManyToOne_Museum_mapping() {
 		assertNotNull(exhibition);
-		assertNotNull(exhibition.getMuseums());
-		assertEquals(1, exhibition.getMuseums().getId());
+		assertNotNull(exhibition.getMuseum());
+		assertEquals(1, exhibition.getMuseum().getId());
 	}
 
 	@Test

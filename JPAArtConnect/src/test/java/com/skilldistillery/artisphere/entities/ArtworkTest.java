@@ -47,7 +47,7 @@ class ArtworkTest {
 		assertEquals("Vincent Van Gogh", artwork.getArtist());
 		assertEquals(2003, artwork.getCreationYear());
 		assertEquals("Distributed eco-centric pricing structure", artwork.getDescription());
-		assertEquals("http://dummyimage.com/171x100.png/5fa2dd/ffffff", artwork.getImage());
+		assertEquals("http://dummyimage.com/171x100.png/5fa2dd/ffffff", artwork.getImageUrl());
 	}
 
 	@Test
@@ -60,8 +60,8 @@ class ArtworkTest {
 	@Test
 	void test_Artwork_ManyToOne_Museum_mapping() {
 		assertNotNull(artwork);
-		assertNotNull(artwork.getMuseums());
-		assertEquals(3, artwork.getMuseums().getId());
+		assertNotNull(artwork.getMuseum());
+		assertEquals(3, artwork.getMuseum().getId());
 	}
 
 	@Test
@@ -71,7 +71,7 @@ class ArtworkTest {
 		newArtwork.setArtist("Test Artist");
 		newArtwork.setCreationYear(2024);
 		newArtwork.setDescription("Test description for artwork.");
-		newArtwork.setImage("http://dummyimage.com/test.png");
+		newArtwork.setImageUrl("http://dummyimage.com/test.png");
 
 	}
 }
