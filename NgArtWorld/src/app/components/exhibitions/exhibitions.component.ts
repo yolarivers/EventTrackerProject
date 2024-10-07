@@ -1,76 +1,96 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ExhibitionService } from '../../services/exhibition.service';
 import { Exhibition } from '../../models/exhibition';
-import { FormsModule } from '@angular/forms';
-import { Museum } from '../../models/museum';
-import { MuseumService } from '../../services/museum.service';
 
 @Component({
-  imports: [CommonModule, FormsModule],
+  selector: 'app-exhibition',
   standalone: true,
-  selector: 'app-exhibitions',
+  imports: [CommonModule],
   templateUrl: './exhibitions.component.html',
+  providers: [ExhibitionService]
 })
 export class ExhibitionComponent implements OnInit {
   exhibitions: Exhibition[] = [];
-  museums: Museum[] = [];
   selectedExhibition: Exhibition | null = null;
-  newExhibition: Exhibition = new Exhibition();
-  showNewExhibition: boolean = false; 
+  errorMessage: string | null = null;
+  selectedFile: File | null = null;
 
-  constructor(
-    private exhibitionService: ExhibitionService,
-    private museumService: MuseumService
-  ) {}
+  constructor(private exhibitionService: ExhibitionService) {}
 
   ngOnInit(): void {
     this.loadExhibitions();
-    this.loadMuseums();
   }
 
   loadExhibitions(): void {
     this.exhibitionService.getAllExhibitions().subscribe({
-      next: (response: Exhibition[]) => {
+      next: (response) => {
         this.exhibitions = response;
+        this.errorMessage = null;
       },
-      error: (error: any) => {
+      error: (error) => {
         console.error('Error fetching exhibitions:', error);
+        this.errorMessage = 'Failed to load exhibitions. Please try again later.';
       }
     });
   }
 
-  loadMuseums(): void {
-    this.museumService.getAllMuseums().subscribe({
-      next: (response: Museum[]) => {
-        this.museums = response;
-      },
-      error: (error: any) => {
-        console.error('Error fetching museums:', error);
-      }
-    });
+  openModal(exhibition?: Exhibition): void {
+    this.selectedExhibition = exhibition
+      ? { ...exhibition } 
+      : { title: '', description: '', startDate: '', endDate: '', imageUrl: '' } as Exhibition;
+    this.selectedFile = null;
   }
 
-  showNewExhibitionForm(): void {
-    this.newExhibition = new Exhibition();
-    this.newExhibition.museum = new Museum(); 
-    this.showNewExhibition = true; 
+  closeModal(): void {
+    this.selectedExhibition = null;
+    this.selectedFile = null;
   }
 
-  addExhibition(exhibition: Exhibition): void {
-    this.exhibitionService.saveExhibition(exhibition).subscribe({
+  onFileSelected(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    if (target && target.files) {
+      this.selectedFile = target.files[0];
+    }
+  }
+
+  saveExhibition(): void {
+    if (!this.selectedExhibition) return;
+
+    const formData = new FormData();
+    formData.append('title', this.selectedExhibition.title);
+    formData.append('description', this.selectedExhibition.description);
+    formData.append('startDate', this.selectedExhibition.startDate);
+    formData.append('endDate', this.selectedExhibition.endDate);
+    if (this.selectedFile) {
+      formData.append('file', this.selectedFile);
+    }
+
+    const saveObservable = this.selectedExhibition.id
+      ? this.exhibitionService.updateExhibition(this.selectedExhibition.id, formData)
+      : this.exhibitionService.uploadExhibition(formData);
+
+    saveObservable.subscribe({
       next: () => {
-        this.newExhibition = new Exhibition();
         this.loadExhibitions();
-        this.showNewExhibition = false; 
+        this.closeModal();
       },
-      error: (error: any) => {
-        console.error('Error adding exhibition:', error);
-      },
+      error: (error) => {
+        console.error(`Error ${this.selectedExhibition?.id ? 'updating' : 'adding'} exhibition:`, error);
+        this.errorMessage = `Failed to ${this.selectedExhibition?.id ? 'update' : 'add'} exhibition. Please try again later.`;
+      }
     });
   }
 
-  openModal(exhibition: Exhibition): void {
-    this.selectedExhibition = exhibition;
+  deleteExhibition(id: number): void {
+    if (confirm('Are you sure you want to delete this exhibition?')) {
+      this.exhibitionService.deleteExhibition(id).subscribe({
+        next: () => this.loadExhibitions(),
+        error: (error) => {
+          console.error('Error deleting exhibition:', error);
+          this.errorMessage = 'Failed to delete exhibition. Please try again later.';
+        }
+      });
+    }
   }
 }

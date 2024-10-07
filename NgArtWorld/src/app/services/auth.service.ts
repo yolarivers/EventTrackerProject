@@ -4,33 +4,27 @@ import { Observable, catchError, throwError, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 import { Buffer } from 'buffer';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   private baseUrl = 'http://localhost:8085/';
   private url = environment.baseUrl;
 
   constructor(private http: HttpClient) {}
 
   register(user: User): Observable<User> {
-
     return this.http.post<User>(this.url + 'register', user).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError(
-          () => new Error('AuthService.register(): error registering user.')
-        );
+        return throwError(() => new Error('AuthService.register(): error registering user.'));
       })
     );
   }
 
-  
   login(username: string, password: string): Observable<User> {
-
     const credentials = this.generateBasicAuthCredentials(username, password);
-  
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: `Basic ${credentials}`,
@@ -38,19 +32,14 @@ export class AuthService {
       }),
     };
 
- 
     return this.http.get<User>(this.url + 'authenticate', httpOptions).pipe(
       tap((newUser) => {
-       
-    
         localStorage.setItem('credentials', credentials);
         return newUser;
       }),
       catchError((err: any) => {
         console.log(err);
-        return throwError(
-          () => new Error('AuthService.login(): error logging in user.')
-        );
+        return throwError(() => new Error('AuthService.login(): error logging in user.'));
       })
     );
   }
@@ -61,9 +50,7 @@ export class AuthService {
 
   getLoggedInUser(): Observable<User> {
     if (!this.checkLogin()) {
-      return throwError(() => {
-        new Error('Not logged in.');
-      });
+      return throwError(() => new Error('Not logged in.'));
     }
     let httpOptions = {
       headers: {
@@ -71,23 +58,16 @@ export class AuthService {
         'X-Requested-with': 'XMLHttpRequest',
       },
     };
-    return this.http
-      .get<User>(this.url + 'authenticate', httpOptions)
-      .pipe(
-        catchError((err: any) => {
-          console.log(err);
-          return throwError(
-            () => new Error( 'AuthService.getUserById(): error retrieving user: ' + err )
-          );
-        })
-      );
+    return this.http.get<User>(this.url + 'authenticate', httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(() => new Error('AuthService.getUserById(): error retrieving user: ' + err));
+      })
+    );
   }
 
   checkLogin(): boolean {
-    if (localStorage.getItem('credentials')) {
-      return true;
-    }
-    return false;
+    return !!localStorage.getItem('credentials');
   }
 
   generateBasicAuthCredentials(username: string, password: string): string {
