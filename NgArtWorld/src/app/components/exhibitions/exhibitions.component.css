@@ -1,0 +1,17 @@
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-dialog {
+  margin-top: 10vh;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+
+.container {
+  margin-top: 20px;
+}

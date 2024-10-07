@@ -78,3 +78,8 @@ export class AuthService {
     return localStorage.getItem('credentials');
   }
 }
+ 
+function ngOnInit() {
+  throw new Error('Function not implemented.');
+}
+

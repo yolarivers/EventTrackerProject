@@ -1,67 +1,68 @@
-<div class="container mt-4">
-  <h2 class="text-center">Exhibitions</h2>
-  
+<div *ngIf="!newExhibition" class="container mt-4">
+  <h2 class="text-center mb-4">Exhibitions</h2>
+  <button class="btn btn-success" (click)="showNewExhibitionForm()">Add New Exhibition</button>
   <div class="row">
     <div class="col-md-4" *ngFor="let exhibition of exhibitions">
       <div class="card mb-3">
-        <img class="card-img-top" [src]="exhibition.imageUrl" alt="Exhibition Image" />
+        <img class="card-img-top" [src]="exhibition.imageUrl" alt="{{ exhibition.title }}">
         <div class="card-body">
           <h5 class="card-title">{{ exhibition.title }}</h5>
           <p class="card-text">{{ exhibition.description }}</p>
+          <p class="card-text">
+            <small class="text-muted">Start Date: {{ exhibition.startDate | date }}</small><br>
+            <small class="text-muted">End Date: {{ exhibition.endDate | date }}</small>
+          </p>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-primary btn-sm" (click)="showEditForm(exhibition)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteExhibition(exhibition.id)">Delete</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="exhibition-grid mt-4">
-  <div *ngFor="let exhibition of exhibitions" class="exhibition-item">
-    <h3>{{ exhibition.title }}</h3>
-    <p>{{ exhibition.description }}</p>
-    <p>Start Date: {{ exhibition.startDate | date }}</p>
-    <p>End Date: {{ exhibition.endDate | date }}</p>
-    <img [src]="exhibition.imageUrl" alt="{{ exhibition.title }}" class="img-fluid" />
-    <div class="mt-2">
-      <button (click)="openModal(exhibition)" class="btn btn-primary btn-sm">Edit</button>
-      <button (click)="deleteExhibition(exhibition.id)" class="btn btn-danger btn-sm">Delete</button>
-    </div>
-  </div>
-</div>
 
-<div class="container mt-4"></div>
-  <h2 class="text-center">Exhibitions</h2>
-  
-  <div class="row">
-    <div class="col-md-4" *ngFor="let exhibition of exhibitions">
-      <div class="card mb-3">
-        <img class="card-img-top" [src]="exhibition.imageUrl" alt="Exhibition Image" />
-        <div class="card-body">
-          <h5 class="card-title">{{ exhibition.title }}</h5>
-          <p class="card-text">{{ exhibition.description }}</p>
+
+  <div *ngIf="newExhibition" class="text-center mt-4">
+    
+
+  <div class="modal fade" tabindex="-1" role="dialog" [class.show]="selectedExhibition" [ngClass]="{'d-block': selectedExhibition}" style="background: rgba(0,0,0,0.5);">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ selectedExhibition ? 'Edit Exhibition' : 'Add New Exhibition' }}</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title" [(ngModel)]="newExhibition.title">
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea class="form-control" id="description" rows="3" [(ngModel)]="newExhibition.description"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="startDate" class="form-label">Start Date</label>
+              <input type="date" class="form-control" id="startDate" [(ngModel)]="newExhibition.startDate">
+            </div>
+            <div class="mb-3">
+              <label for="endDate" class="form-label">End Date</label>
+              <input type="date" class="form-control" id="endDate" [(ngModel)]="newExhibition.endDate">
+            </div>
+            <div class="mb-3">
+              <label for="imageUrl" class="form-label">Image URL</label>
+              <input type="text" class="form-control" id="imageUrl" [(ngModel)]="newExhibition.imageUrl">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="saveExhibition(newExhibition)">Save changes</button>
         </div>
       </div>
     </div>
   </div>
-
-
-<div class="exhibition-grid mt-4">
-  <div *ngFor="let exhibition of exhibitions" class="exhibition-item">
-    <h3>{{ exhibition.title }}</h3>
-    <p>{{ exhibition.description }}</p>
-    <p>Start Date: {{ exhibition.startDate | date }}</p>
-    <p>End Date: {{ exhibition.endDate | date }}</p>
-    <img [src]="exhibition.imageUrl" alt="{{ exhibition.title }}" class="img-fluid" />
-    <div class="mt-2">
-      <button (click)="openModal(exhibition)" class="btn btn-primary btn-sm">Edit</button>
-      <button (click)="deleteExhibition(exhibition.id)" class="btn btn-danger btn-sm">Delete</button>
-    </div>
-  </div>
 </div>
-
-<button (click)="openModal()" class="btn btn-success mt-3">Add New Exhibition</button>
-
-<div *ngIf="selectedExhibition" class="modal d-block">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">{{ selectedExhibition.id ? 'Edit Exhibition' : 'Add New Exhibition' }}</h5>

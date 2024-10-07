@@ -12,11 +12,22 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule]
 })
 export class ArtworkComponent implements OnInit {
+openModal(_t6: any) {
+throw new Error('Method not implemented.');
+}
+deleteExhibition(arg0: any) {
+throw new Error('Method not implemented.');
+}
+closeModal() {
+throw new Error('Method not implemented.');
+}
   artworks: Artwork[] = [];  
   selectedArtwork: Artwork | null = null;
   artworkRating: number = 0;
   artworkComments: string[] = [];
   commentText: string = '';
+exhibitions: any;
+selectedExhibition: any;
 
   constructor(private artworkService: ArtworkService) {}
 
