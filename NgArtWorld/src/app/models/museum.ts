@@ -1,4 +1,4 @@
-import { Exhibition } from "./exhibition";
+import { Exhibition } from './exhibition';
 
 export class Museum {
   id: number;
@@ -9,7 +9,7 @@ export class Museum {
   imageUrl: string;
   createdAt: string;
   updatedAt: string;
-  exhibitions: Exhibition[];
+  exhibition: Exhibition[];
 
   constructor(
     id: number = 0,
@@ -20,7 +20,7 @@ export class Museum {
     imageUrl: string = '',
     createdAt: string = '',
     updatedAt: string = '',
-    exhibitions: Exhibition[] = []
+    exhibition: Exhibition[] = []
   ) {
     this.id = id;
     this.name = name;
@@ -30,15 +30,15 @@ export class Museum {
     this.imageUrl = imageUrl;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
-    this.exhibitions = exhibitions;
+    this.exhibition = exhibition;
   }
 
   toString(): string {
-    return `Museums [id=${this.id}, name=${this.name}, location=${this.location}]`;
+    return `Museum [id=${this.id}, name=${this.name}, location=${this.location}]`;
   }
 
   equals(other: Museum): boolean {
-    return this.id === other.id;
+    return other instanceof Museum && this.id === other.id;
   }
 
   hashCode(): number {

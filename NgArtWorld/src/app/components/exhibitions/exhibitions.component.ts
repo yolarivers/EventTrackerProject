@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ExhibitionsService } from '../../services/exhibitions.service';
+import { ExhibitionService } from '../../services/exhibition.service';
 import { Exhibition } from '../../models/exhibition';
 import { FormsModule } from '@angular/forms';
 import { Museum } from '../../models/museum';
-import { MuseumsService } from '../../services/museums.service';
+import { MuseumService } from '../../services/museum.service';
 
 @Component({
   imports: [CommonModule, FormsModule],
@@ -12,15 +12,16 @@ import { MuseumsService } from '../../services/museums.service';
   selector: 'app-exhibitions',
   templateUrl: './exhibitions.component.html',
 })
-export class ExhibitionsComponent implements OnInit {
+export class ExhibitionComponent implements OnInit {
   exhibitions: Exhibition[] = [];
   museums: Museum[] = [];
   selectedExhibition: Exhibition | null = null;
-  newExhibition: Exhibition | null = null;
+  newExhibition: Exhibition = new Exhibition();
+  showNewExhibition: boolean = false; 
 
   constructor(
-    private exhibitionsService: ExhibitionsService,
-    private museumService: MuseumsService
+    private exhibitionService: ExhibitionService,
+    private museumService: MuseumService
   ) {}
 
   ngOnInit(): void {
@@ -28,47 +29,48 @@ export class ExhibitionsComponent implements OnInit {
     this.loadMuseums();
   }
 
-  loadExhibitions() {
-    this.exhibitionsService.getAllExhibitions().subscribe(
-      (response) => {
+  loadExhibitions(): void {
+    this.exhibitionService.getAllExhibitions().subscribe({
+      next: (response: Exhibition[]) => {
         this.exhibitions = response;
       },
-      (error) => {
-        console.error(error);
+      error: (error: any) => {
+        console.error('Error fetching exhibitions:', error);
       }
-    );
+    });
   }
 
-  loadMuseums() {
-    this.museumService.getAllMuseums().subscribe(
-      (response) => {
+  loadMuseums(): void {
+    this.museumService.getAllMuseums().subscribe({
+      next: (response: Museum[]) => {
         this.museums = response;
       },
-      (error) => {
-        console.error(error);
+      error: (error: any) => {
+        console.error('Error fetching museums:', error);
       }
-    );
+    });
   }
 
-  showNewExhibitionForm() {
+  showNewExhibitionForm(): void {
     this.newExhibition = new Exhibition();
     this.newExhibition.museum = new Museum(); 
+    this.showNewExhibition = true; 
   }
 
-  addExhibition(exhibition: Exhibition) {
-    this.exhibitionsService.saveExhibitions(exhibition).subscribe({
-      next: (response) => {
-        this.newExhibition = null;
+  addExhibition(exhibition: Exhibition): void {
+    this.exhibitionService.saveExhibition(exhibition).subscribe({
+      next: () => {
+        this.newExhibition = new Exhibition();
         this.loadExhibitions();
+        this.showNewExhibition = false; 
       },
-      error: (error) => {
-        console.error(error);
+      error: (error: any) => {
+        console.error('Error adding exhibition:', error);
       },
     });
   }
 
-  openModal(exhibition: Exhibition) {
+  openModal(exhibition: Exhibition): void {
     this.selectedExhibition = exhibition;
-   
   }
 }

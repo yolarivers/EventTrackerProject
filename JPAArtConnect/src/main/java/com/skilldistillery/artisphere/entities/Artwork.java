@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+
 @Entity
 public class Artwork {
 
@@ -21,24 +22,26 @@ public class Artwork {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+   
     private String title;
 
+ 
     private String artist;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-
-	@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "museum_id")
     private Museum museum;
 
     @Column(name = "creation_year")
     private int creationYear;
 
-    private String description;
     
+    private String description;
+
     @Column(name = "image_url")
     private String imageUrl;
 
@@ -50,16 +53,20 @@ public class Artwork {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    
-    public User getUser() {
-  		return user;
-  	}
+    public Artwork() {}
 
-  	public void setUser(User user) {
-  		this.user = user;
-  	}
-    
-    
+    public Artwork(String title, String artist, User user, Museum museum, int creationYear, String description, String imageUrl) {
+        this.title = title;
+        this.artist = artist;
+        this.user = user;
+        this.museum = museum;
+        this.creationYear = creationYear;
+        this.description = description;
+        this.imageUrl = imageUrl;
+    }
+
+
+
     public int getId() {
         return id;
     }
@@ -84,7 +91,13 @@ public class Artwork {
         this.artist = artist;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Museum getMuseum() {
         return museum;
@@ -110,21 +123,13 @@ public class Artwork {
         this.description = description;
     }
 
-    public void updateDescription(String newDescription) {
-        if (newDescription != null && !newDescription.trim().isEmpty()) {
-            this.description = newDescription;
-        }
-    }
-
-    
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageUrl(String image) {
+        this.imageUrl = image;
     }
-
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
@@ -142,15 +147,11 @@ public class Artwork {
         this.updatedAt = updatedAt;
     }
 
-  
     @Override
     public String toString() {
-        return "Artwork [id=" + id + ", title=" + title + ", artist=" + artist + 
-               ", creationYear=" + creationYear + ", museum=" + (museum != null ? museum.getName() : "null") + "]";
+        return "Artwork [id=" + id + ", title=" + title + ", artist=" + artist + ", creationYear=" + creationYear + "]";
     }
 
-
-  
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -161,10 +162,6 @@ public class Artwork {
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, artist, creationYear);
+        return Objects.hash(id);
     }
-    
-    
-   
-    
 }

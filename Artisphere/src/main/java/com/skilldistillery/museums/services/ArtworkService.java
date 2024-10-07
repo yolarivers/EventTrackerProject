@@ -2,7 +2,6 @@ package com.skilldistillery.museums.services;
 
 import java.util.List;
 import com.skilldistillery.artisphere.entities.Artwork;
-import com.skilldistillery.artisphere.entities.Museum;
 
 public interface ArtworkService {
     List<Artwork> getAllArtworks();

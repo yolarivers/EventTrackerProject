@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ArtisphereApplication {
 	
 	@Bean
-	  public PasswordEncoder configurePasswordEncoder() {
+	  protected PasswordEncoder configurePasswordEncoder() {
 	    return new BCryptPasswordEncoder();
 	  }
 

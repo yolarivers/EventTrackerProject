@@ -341,6 +341,53 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `favorite_artwork`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `artworlddb`;
+INSERT INTO `favorite_artwork` (`user_id`, `artwork_id`) VALUES (2, 4);
+INSERT INTO `favorite_artwork` (`user_id`, `artwork_id`) VALUES (1, 6);
+INSERT INTO `favorite_artwork` (`user_id`, `artwork_id`) VALUES (7, 5);
+INSERT INTO `favorite_artwork` (`user_id`, `artwork_id`) VALUES (3, 9);
+INSERT INTO `favorite_artwork` (`user_id`, `artwork_id`) VALUES (3, 7);
+INSERT INTO `favorite_artwork` (`user_id`, `artwork_id`) VALUES (3, 3);
+INSERT INTO `favorite_artwork` (`user_id`, `artwork_id`) VALUES (1, 7);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `favorite_exhibitions`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `artworlddb`;
+INSERT INTO `favorite_exhibitions` (`user_id`, `exhibition_id`) VALUES (8, 6);
+INSERT INTO `favorite_exhibitions` (`user_id`, `exhibition_id`) VALUES (3, 4);
+INSERT INTO `favorite_exhibitions` (`user_id`, `exhibition_id`) VALUES (1, 5);
+INSERT INTO `favorite_exhibitions` (`user_id`, `exhibition_id`) VALUES (7, 1);
+INSERT INTO `favorite_exhibitions` (`user_id`, `exhibition_id`) VALUES (7, 7);
+INSERT INTO `favorite_exhibitions` (`user_id`, `exhibition_id`) VALUES (2, 8);
+INSERT INTO `favorite_exhibitions` (`user_id`, `exhibition_id`) VALUES (9, 2);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `exhibition_has_artwork`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `artworlddb`;
+INSERT INTO `exhibition_has_artwork` (`artwork_id`, `exhibition_id`) VALUES (1, 3);
+INSERT INTO `exhibition_has_artwork` (`artwork_id`, `exhibition_id`) VALUES (2, 4);
+INSERT INTO `exhibition_has_artwork` (`artwork_id`, `exhibition_id`) VALUES (3, 5);
+INSERT INTO `exhibition_has_artwork` (`artwork_id`, `exhibition_id`) VALUES (4, 6);
+INSERT INTO `exhibition_has_artwork` (`artwork_id`, `exhibition_id`) VALUES (7, 4);
+INSERT INTO `exhibition_has_artwork` (`artwork_id`, `exhibition_id`) VALUES (6, 8);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `exhibition_review`
 -- -----------------------------------------------------
 START TRANSACTION;

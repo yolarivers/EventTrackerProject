@@ -4,7 +4,7 @@ import { User } from "./user";
 export class ExhibitionReview {
   id: number;
   user: User | null;
-  exhibitions: Exhibition | null;
+  exhibition: Exhibition | null;
   rating: number;
   comment: string;
   createdAt: string;
@@ -13,7 +13,7 @@ export class ExhibitionReview {
   constructor(
     id: number = 0,
     user: User | null = null,
-    exhibitions: Exhibition | null = null,
+    exhibition: Exhibition | null = null,
     rating: number = 0,
     comment: string = '',
     createdAt: string = '',
@@ -21,7 +21,7 @@ export class ExhibitionReview {
   ) {
     this.id = id;
     this.user = user;
-    this.exhibitions = exhibitions;
+    this.exhibition = exhibition;
     this.rating = rating;
     this.comment = comment;
     this.createdAt = createdAt;
@@ -29,7 +29,7 @@ export class ExhibitionReview {
   }
 
   toString(): string {
-    return `ExhibitionsReview [id=${this.id}, rating=${this.rating}, comment=${this.comment}]`;
+    return `ExhibitionReview [id=${this.id}, rating=${this.rating}, comment=${this.comment}]`;
   }
 
   equals(other: ExhibitionReview): boolean {

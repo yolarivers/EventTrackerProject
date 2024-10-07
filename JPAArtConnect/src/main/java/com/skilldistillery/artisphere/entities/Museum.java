@@ -46,9 +46,8 @@ public class Museum {
 
     @OneToMany(mappedBy = "museum")
     @JsonIgnore 
-    private List<Exhibition> exhibitions;
+    private List<Exhibition> exhibitions = new ArrayList<>();
 
-  
     public int getId() {
         return id;
     }
@@ -93,8 +92,8 @@ public class Museum {
         return imageUrl;
     }
 
-    public void setImageUrl(String image) {
-        this.imageUrl = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -113,35 +112,30 @@ public class Museum {
         this.updatedAt = updatedAt;
     }
 
+    @JsonIgnore
     public List<Exhibition> getExhibitions() {
         return exhibitions;
     }
     
     public void addExhibition(Exhibition exhibition) {
-        if (exhibitions == null) exhibitions = new ArrayList<>();
         exhibitions.add(exhibition);
         exhibition.setMuseum(this);
     }
 
     public void removeExhibition(Exhibition exhibition) {
-        if (exhibitions != null) exhibitions.remove(exhibition);
+        exhibitions.remove(exhibition);
         exhibition.setMuseum(null);
     }
 
-    
-
-    public void setExhibitions(List<Exhibition> exhibition) {
-        this.exhibitions = exhibition;
+    public void setExhibitions(List<Exhibition> exhibitions) {
+        this.exhibitions = exhibitions;
     }
 
-    
     @Override
     public String toString() {
-        return "Museum [id=" + id + ", name=" + name + ", location=" + location + ", websiteUrl=" + websiteUrl + "]";
+        return "Museum [id=" + id + ", name=" + name + ", location=" + location + ", description=" + description + ", websiteUrl=" + websiteUrl + "]";
     }
 
-
- 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

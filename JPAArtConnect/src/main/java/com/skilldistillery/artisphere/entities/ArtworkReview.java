@@ -31,7 +31,6 @@ public class ArtworkReview {
 	private Artwork artwork;
 
 	private int rating;
-
 	private String comment;
 
 	@CreationTimestamp
@@ -41,6 +40,7 @@ public class ArtworkReview {
 	@UpdateTimestamp
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
+
 
 	public int getId() {
 		return id;
@@ -71,18 +71,8 @@ public class ArtworkReview {
 	}
 
 	public void setRating(int rating) {
-		this.rating = rating;
-	}
-
-	public void updateRating(int newRating) {
-		if (newRating >= 1 && newRating <= 5) {
-			this.rating = newRating;
-		}
-	}
-
-	public void updateComment(String newComment) {
-		if (newComment != null && !newComment.trim().isEmpty()) {
-			this.comment = newComment;
+		if (rating >= 1 && rating <= 5) {
+			this.rating = rating;
 		}
 	}
 
@@ -91,7 +81,9 @@ public class ArtworkReview {
 	}
 
 	public void setComment(String comment) {
-		this.comment = comment;
+		if (comment != null && !comment.trim().isEmpty()) {
+			this.comment = comment;
+		}
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -110,10 +102,12 @@ public class ArtworkReview {
 		this.updatedAt = updatedAt;
 	}
 
+
 	@Override
 	public String toString() {
-		return "ArtworkReview [id=" + id + ", user=" + (user != null ? user.getUsername() : "null") + ", artwork="
-				+ (artwork != null ? artwork.getTitle() : "null") + ", rating=" + rating + ", comment=" + comment + "]";
+		return "ArtworkReview [id=" + id + ", user=" + (user != null ? user.getUsername() : "null") 
+				+ ", artwork=" + (artwork != null ? artwork.getTitle() : "null") 
+				+ ", rating=" + rating + ", comment=" + comment + "]";
 	}
 
 	@Override
@@ -128,6 +122,6 @@ public class ArtworkReview {
 
 	@Override
 	public int hashCode() {
-	    return Objects.hash(user, artwork, createdAt);
+		return Objects.hash(id);
 	}
 }

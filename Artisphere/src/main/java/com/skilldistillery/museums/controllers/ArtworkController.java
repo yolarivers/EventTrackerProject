@@ -28,12 +28,12 @@ public class ArtworkController {
     private ArtworkService artworkService;
 
   
-    @GetMapping("artworks")
+    @GetMapping("artwork")
     public List<Artwork> getAllArtworks() {
         return artworkService.getAllArtworks();
     }
 
-    @GetMapping("artworks/{id}")
+    @GetMapping("artwork/{id}")
     public ResponseEntity<Artwork> getArtworkById(@PathVariable int id) {
         Artwork artwork = artworkService.showArtwork(id);
         if (artwork == null) {
@@ -42,14 +42,14 @@ public class ArtworkController {
         return new ResponseEntity<>(artwork, HttpStatus.OK);
     }
 
-    @PostMapping("artworks")
+    @PostMapping("artwork")
     public ResponseEntity<Artwork> createArtwork(@RequestBody Artwork newArtwork, Principal principal) {
     	
         Artwork createdArtwork = artworkService.create(newArtwork, principal.getName());
         return new ResponseEntity<>(createdArtwork, HttpStatus.CREATED);
     }
 
-    @PutMapping("artworks/{id}")
+    @PutMapping("artwork/{id}")
     public ResponseEntity<Artwork> updateArtwork(@PathVariable int id, @RequestBody Artwork updatingArtwork, Principal principal) {
         Artwork updatedArtwork = artworkService.update(id, updatingArtwork, principal.getName());
         if (updatedArtwork == null) {
@@ -58,7 +58,7 @@ public class ArtworkController {
         return new ResponseEntity<>(updatedArtwork, HttpStatus.OK);
     }
 
-    @DeleteMapping("artworks/{id}")
+    @DeleteMapping("artwork/{id}")
     public ResponseEntity<Void> deleteArtwork(@PathVariable int id, Principal principal) {
         boolean deleted = artworkService.delete(id, principal.getName());
         if (deleted) {

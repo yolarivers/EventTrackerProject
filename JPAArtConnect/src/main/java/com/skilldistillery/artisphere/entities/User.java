@@ -23,160 +23,155 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    private String username;
 
-	private String username;
+    private String email;
 
-	private String email;
+    private String password;
 
-	private String password;
+    private String role;
 
-	private String role;
+    private Boolean enabled;
 
-	private Boolean enabled;
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-	@CreationTimestamp
-	@Column(name = "created_at")
-	private LocalDateTime createdAt;
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
-	@UpdateTimestamp
-	@Column(name = "updated_at")
-	private LocalDateTime updatedAt;
+    @ManyToMany
+    @JoinTable(name = "favorite_artwork", 
+               joinColumns = @JoinColumn(name = "user_id"), 
+               inverseJoinColumns = @JoinColumn(name = "artwork_id"))
+    @JsonIgnore
+    private List<Artwork> favoriteArtworks = new ArrayList<>();
 
-	@JoinTable(name = "favorite_artwork", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "artwork_id"))
-	@ManyToMany
-	@JsonIgnore
-	private List<Artwork> favoriteArtworks;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Artwork> artworks = new ArrayList<>();
 
-	@OneToMany(mappedBy="user")
-	@JsonIgnore
-	private List<Artwork> artworks;
+    @ManyToMany
+    @JoinTable(name = "favorite_exhibitions", 
+               joinColumns = @JoinColumn(name = "user_id"), 
+               inverseJoinColumns = @JoinColumn(name = "exhibitions_id"))
+    @JsonIgnore
+    private List<Exhibition> favoriteExhibitions = new ArrayList<>();
 
-	public List<Artwork> getArtworks() {
-		return artworks;
-	}
+  
+    public int getId() {
+        return id;
+    }
 
-	public void setArtworks(List<Artwork> artworks) {
-		this.artworks = artworks;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	@JoinTable(name = "favorite_exhibitions", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "exhibitions_id"))
-	@ManyToMany
-	@JsonIgnore
-	private List<Exhibition> favoriteExhibitions;
+    public String getUsername() {
+        return username;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getRole() {
+        return role;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
-	public String getRole() {
-		return role;
-	}
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
+    public Boolean getEnabled() {
+        return enabled;
+    }
 
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
-	}
+    @JsonIgnore
+    public List<Artwork> getFavoriteArtworks() {
+        return favoriteArtworks;
+    }
 
-	public Boolean getEnabled() {
-		return enabled;
-	}
+    public void setFavoriteArtworks(List<Artwork> favoriteArtworks) {
+        this.favoriteArtworks = favoriteArtworks;
+    }
 
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
+    @JsonIgnore
+    public List<Artwork> getArtworks() {
+        return artworks;
+    }
 
-	public List<Artwork> getFavoriteArtworks() {
-		return favoriteArtworks;
-	}
-	
-	
-	public void addFavoriteArtwork(Artwork artwork) {
-	    if (favoriteArtworks == null) favoriteArtworks = new ArrayList<>();
-	    favoriteArtworks.add(artwork);
-	}
+    public void setArtworks(List<Artwork> artworks) {
+        this.artworks = artworks;
+    }
 
-	public void removeFavoriteArtwork(Artwork artwork) {
-	    if (favoriteArtworks != null) favoriteArtworks.remove(artwork);
-	}
+    @JsonIgnore
+    public List<Exhibition> getFavoriteExhibitions() {
+        return favoriteExhibitions;
+    }
 
+    public void setFavoriteExhibitions(List<Exhibition> favoriteExhibitions) {
+        this.favoriteExhibitions = favoriteExhibitions;
+    }
 
-	public void setFavoriteArtworks(List<Artwork> favoriteArtworks) {
-		this.favoriteArtworks = favoriteArtworks;
-	}
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", username=" + username + ", email=" + email + ", role=" + role + "]";
+    }
 
-	public List<Exhibition> getFavoriteExhibitions() {
-		return favoriteExhibitions;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        User user = (User) o;
+        return id == user.id;
+    }
 
-	public void setFavoriteExhibitions(List<Exhibition> favoriteExhibitions) {
-		this.favoriteExhibitions = favoriteExhibitions;
-	}
-
-	@Override
-	public String toString() {
-	    return "User [id=" + id + ", username=" + username + ", email=" + email 
-	           + ", role=" + role + ", enabled=" + enabled + ", createdAt=" + createdAt + "]";
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		User user = (User) o;
-		return id == user.id;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

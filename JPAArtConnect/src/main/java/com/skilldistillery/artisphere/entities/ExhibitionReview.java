@@ -18,36 +18,35 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="exhibition_review")
+@Table(name = "exhibition_review")
 public class ExhibitionReview {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "exhibition_id")
     private Exhibition exhibition;
 
-
     private int rating;
-
     private String comment;
 
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-    
+
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-  
+   
     public int getId() {
         return id;
     }
@@ -64,11 +63,11 @@ public class ExhibitionReview {
         this.user = user;
     }
 
-    public Exhibition getExhibitions() {
+    public Exhibition getExhibition() {  
         return exhibition;
     }
 
-    public void setExhibitions(Exhibition exhibition) {
+    public void setExhibition(Exhibition exhibition) {  
         this.exhibition = exhibition;
     }
 
@@ -77,29 +76,19 @@ public class ExhibitionReview {
     }
 
     public void setRating(int rating) {
-        this.rating = rating;
-    }
-    
-    
-    public void updateRating(int newRating) {
-        if (newRating >= 1 && newRating <= 5) {
-            this.rating = newRating;
+        if (rating >= 1 && rating <= 5) {
+            this.rating = rating;
         }
     }
-
-    public void updateComment(String newComment) {
-        if (newComment != null && !newComment.trim().isEmpty()) {
-            this.comment = newComment;
-        }
-    }
-
 
     public String getComment() {
         return comment;
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        if (comment != null && !comment.trim().isEmpty()) {
+            this.comment = comment;
+        }
     }
 
     public LocalDateTime getCreatedAt() {
@@ -118,28 +107,25 @@ public class ExhibitionReview {
         this.updatedAt = updatedAt;
     }
 
-  
+
     @Override
     public String toString() {
-        return "ExhibitionReview [id=" + id + ", user=" + (user != null ? user.getUsername() : "null")
-               + ", exhibition=" + (exhibition != null ? exhibition.getTitle() : "null")
-               + ", rating=" + rating + ", comment=" + comment + "]";
+        return "ExhibitionReview [id=" + id 
+            + ", user=" + (user != null ? user.getUsername() : "null")
+            + ", exhibition=" + (exhibition != null ? exhibition.getTitle() : "null")
+            + ", rating=" + rating + ", comment=" + comment + "]";
     }
 
-
-  
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ExhibitionReview exhibitionReview = (ExhibitionReview) o;
-        return id == exhibitionReview.id;
-        
-
+        ExhibitionReview that = (ExhibitionReview) o;
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-    	return Objects.hash(user, exhibition, createdAt);
+        return Objects.hash(id);  
     }
 }

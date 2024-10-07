@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.artisphere.entities.Museum;
-import com.skilldistillery.museums.services.MuseumsService;
+import com.skilldistillery.museums.services.MuseumService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,29 +20,29 @@ import jakarta.servlet.http.HttpServletResponse;
 @CrossOrigin({"*", "http://localhost/"})
 @RestController
 @RequestMapping("api")
-public class MuseumsController {
+public class MuseumController {
     
     @Autowired
-    private MuseumsService museumsService;
+    private MuseumService museumService;
 
-    @GetMapping("museums")
-    public List<Museum> getMuseumsList() {
-        return museumsService.getAllMuseums();
+    @GetMapping("museum")
+    public List<Museum> getMuseumList() {
+        return museumService.getAllMuseums();
     }
 
-    @GetMapping("museums/{museumsId}")
-    public Museum getMuseumById(@PathVariable("museumsId") Integer museumsId, HttpServletResponse res) {
-        Museum museum = museumsService.getMuseumById(museumsId);
+    @GetMapping("museum/{museumId}")
+    public Museum getMuseumById(@PathVariable("museumId") Integer museumId, HttpServletResponse res) {
+        Museum museum = museumService.getMuseumById(museumId);
         if (museum == null) {
             res.setStatus(404);
         }
         return museum;
     }
 
-    @PostMapping("museums")
+    @PostMapping("museum")
     public Museum createMuseum(@RequestBody Museum newMuseum, HttpServletRequest req, HttpServletResponse res) {
         try {
-            newMuseum = museumsService.create(newMuseum);
+            newMuseum = museumService.create(newMuseum);
             res.setStatus(201);
             res.setHeader("Location", req.getRequestURL().append("/").append(newMuseum.getId()).toString());
         } catch (Exception e) {

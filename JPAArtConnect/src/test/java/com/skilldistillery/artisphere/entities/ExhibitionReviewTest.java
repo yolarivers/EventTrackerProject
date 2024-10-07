@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import jakarta.persistence.EntityManager;
@@ -40,29 +39,22 @@ class ExhibitionReviewTest {
 	}
 
 	@Test
-	void testExhibitionsReviewFields() {
+	void testExhibitionReviewFields() {
 		assertNotNull(review);
 		assertEquals(5, review.getRating());
 	}
 
 	@Test
-	void test_ExhibitionsReview_entity_mapping() {
-		assertNotNull(review);
-		assertEquals(5, review.getRating());
-	}
-
-	@Test
-	void test_ExhibitionsReview_ManyToOne_User_mapping() {
+	void testExhibitionReview_ManyToOne_User_mapping() {
 		assertNotNull(review);
 		assertNotNull(review.getUser());
 		assertEquals(1, review.getUser().getId());
 	}
 
 	@Test
-	void test_ExhibitionsReview_ManyToOne_Exhibitions_mapping() {
+	void testExhibitionReview_ManyToOne_Exhibition_mapping() {
 		assertNotNull(review);
-		assertNotNull(review.getExhibitions());
-		assertEquals(1, review.getExhibitions().getId());
+		assertNotNull(review.getExhibition());
+		assertEquals(1, review.getExhibition().getId());
 	}
-
 }

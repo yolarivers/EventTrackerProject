@@ -27,11 +27,7 @@ public class ArtworkServiceImpl implements ArtworkService {
 
 	@Override
 	public Artwork showArtwork(int artworkId) {
-		Optional<Artwork> opt = artworkRepo.findById(artworkId);
-		if (opt.isPresent()) {
-			return opt.get();
-		}
-		return null;
+		return artworkRepo.findById(artworkId).orElse(null);
 	}
 
 	@Override
@@ -41,22 +37,19 @@ public class ArtworkServiceImpl implements ArtworkService {
 			newArtwork.setUser(user);
 			return artworkRepo.save(newArtwork);
 		}
-
 		return null;
 	}
 
 	@Override
 	public Artwork update(int artworkId, Artwork updatingArtwork, String username) {
 		Optional<Artwork> opt = artworkRepo.findById(artworkId);
-		if (opt.isPresent()&& opt.get().getUser().getUsername().equals(username)) {
+		if (opt.isPresent() && opt.get().getUser().getUsername().equals(username)) {
 			Artwork managedArtwork = opt.get();
-
 			managedArtwork.setTitle(updatingArtwork.getTitle());
 			managedArtwork.setArtist(updatingArtwork.getArtist());
 			managedArtwork.setDescription(updatingArtwork.getDescription());
 			managedArtwork.setImageUrl(updatingArtwork.getImageUrl());
 			managedArtwork.setCreationYear(updatingArtwork.getCreationYear());
-
 			return artworkRepo.save(managedArtwork);
 		}
 		return null;
@@ -64,7 +57,8 @@ public class ArtworkServiceImpl implements ArtworkService {
 
 	@Override
 	public boolean delete(int artworkId, String username) {
-		if (artworkRepo.existsByIdAndUser_Username(artworkId, username)) {
+		Optional<Artwork> artworkOpt = artworkRepo.findByIdAndUser_Username(artworkId, username);
+		if (artworkOpt.isPresent()) {
 			artworkRepo.deleteById(artworkId);
 			return true;
 		}
@@ -73,7 +67,7 @@ public class ArtworkServiceImpl implements ArtworkService {
 
 	@Override
 	public Artwork findById(int id) {
-
+		
 		return null;
 	}
 }

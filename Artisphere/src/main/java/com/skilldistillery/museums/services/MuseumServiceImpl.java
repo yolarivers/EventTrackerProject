@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.artisphere.entities.Museum;
-import com.skilldistillery.museums.repositories.MuseumsRepository;
+import com.skilldistillery.museums.repositories.MuseumRepository;
 
 @Service
-public class MuseumsServiceImpl implements MuseumsService {
+public class MuseumServiceImpl implements MuseumService {
 
     @Autowired
-    private MuseumsRepository museumRepo;
+    private MuseumRepository museumRepo;
 
     @Override
     public List<Museum> getAllMuseums() {
@@ -22,8 +22,8 @@ public class MuseumsServiceImpl implements MuseumsService {
 
     @Override
     public Museum getMuseumById(int id) {
-        Optional<Museum> optMuseums = museumRepo.findById(id);
-        return optMuseums.orElse(null); 
+        Optional<Museum> optMuseum = museumRepo.findById(id);
+        return optMuseum.orElse(null);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MuseumsServiceImpl implements MuseumsService {
 
             return museumRepo.save(existingMuseum);
         }
-        return null; 
+        return null;
     }
 
     @Override
@@ -57,9 +57,8 @@ public class MuseumsServiceImpl implements MuseumsService {
         return false;
     }
 
-	@Override
-	public Museum create(Museum newMuseum) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Museum create(Museum newMuseum) {
+        return museumRepo.save(newMuseum);
+    }
 }

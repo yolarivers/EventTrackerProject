@@ -20,14 +20,12 @@ public class Exhibition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-   
     private String title;
     
     @ManyToOne
     @JoinColumn(name = "museum_id")
     private Museum museum;
 
-   
     private String description;
 
     @Column(name = "start_date")
@@ -47,13 +45,13 @@ public class Exhibition {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
-    @JoinTable(name = "exhibitions_has_artwork", joinColumns = @JoinColumn(name="exhibition_id"),inverseJoinColumns =@JoinColumn(name="artwork_id"))
+    @JoinTable(name = "exhibitions_has_artwork", joinColumns = @JoinColumn(name="exhibition_id"), 
+               inverseJoinColumns = @JoinColumn(name="artwork_id"))
     @ManyToMany
     @JsonIgnore
-    private List<Artwork> artworks;
-
+    private List<Artwork> artworks = new ArrayList<>(); 
     
-    
+  
     public int getId() {
 		return id;
 	}
@@ -135,17 +133,16 @@ public class Exhibition {
 	}
 	
 	public void addArtwork(Artwork artwork) {
-	    if (artworks == null) artworks = new ArrayList<>();
 	    if (!artworks.contains(artwork)) {
 	        artworks.add(artwork);
+	       
 	    }
 	}
 
-
 	public void removeArtwork(Artwork artwork) {
-	    if (artworks != null) artworks.remove(artwork);
+	    artworks.remove(artwork);
+	    
 	}
-
 
 	@Override
 	public String toString() {
@@ -154,22 +151,16 @@ public class Exhibition {
 	           + ", endDate=" + endDate + ", description=" + description + "]";
 	}
 
-
-	
 	@Override
 	public boolean equals(Object o) {
 	    if (this == o) return true;
 	    if (o == null || getClass() != o.getClass()) return false;
 	    Exhibition exhibition = (Exhibition) o;
 	    return id == exhibition.id;
-	          
 	}
 
 	@Override
 	public int hashCode() {
-	    return Objects.hash(title, startDate, endDate);
+	    return Objects.hash(id);
 	}
-
-	
-    
 }

@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule]
 })
 export class ArtworkComponent implements OnInit {
-  Artworks: Artwork[] = [];  // Updated variable name to match across the component
+  artworks: Artwork[] = [];  
   selectedArtwork: Artwork | null = null;
   artworkRating: number = 0;
   artworkComments: string[] = [];
@@ -27,7 +27,7 @@ export class ArtworkComponent implements OnInit {
   loadArtwork(): void {
     this.artworkService.getAllArtworks().subscribe(
       (response: Artwork[]) => {
-        this.Artworks = response;  // Ensure that the API response is correctly set to Artworks
+        this.artworks = response;  
       },
       (error: any) => {
         console.error('Error fetching art collection:', error);
@@ -37,10 +37,12 @@ export class ArtworkComponent implements OnInit {
 
   showArtworkDetails(artwork: Artwork): void {
     this.selectedArtwork = artwork;
+    this.resetArtworkDetails();
   }
 
   closeArtworkModal(): void {
     this.selectedArtwork = null;
+    this.resetArtworkDetails();
   }
 
   rateArtwork(rating: number): void {
@@ -52,5 +54,10 @@ export class ArtworkComponent implements OnInit {
       this.artworkComments.push(this.commentText);
       this.commentText = '';
     }
+  }
+
+  private resetArtworkDetails(): void {
+    this.artworkRating = 0;
+    this.artworkComments = [];
   }
 }

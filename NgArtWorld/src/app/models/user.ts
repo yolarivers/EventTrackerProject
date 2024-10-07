@@ -11,7 +11,7 @@ export class User {
   createdAt: string;
   updatedAt: string;
   favoriteArtworks: Artwork[];
-  artworks: Artwork[];
+  artwork: Artwork[];
   favoriteExhibitions: Exhibition[];
 
   constructor(
@@ -24,7 +24,7 @@ export class User {
     createdAt: string = '',
     updatedAt: string = '',
     favoriteArtworks: Artwork[] = [],
-    artworks: Artwork[] = [],
+    artwork: Artwork[] = [],
     favoriteExhibitions: Exhibition[] = []
   ) {
     this.id = id;
@@ -36,7 +36,7 @@ export class User {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.favoriteArtworks = favoriteArtworks;
-    this.artworks = artworks;
+    this.artwork = artwork;
     this.favoriteExhibitions = favoriteExhibitions;
   }
 

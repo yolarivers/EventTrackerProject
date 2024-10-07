@@ -6,7 +6,7 @@ export class Artwork {
   title: string;
   artist: string;
   user: User | null;
-  museums: Museum | null;
+  museum: Museum | null;
   creationYear: number;
   description: string;
   imageUrl: string;
@@ -29,7 +29,7 @@ export class Artwork {
     this.title = title;
     this.artist = artist;
     this.user = user;
-    this.museums = museums;
+    this.museum = museums;
     this.creationYear = creationYear;
     this.description = description;
     this.imageUrl = imageUrl;
