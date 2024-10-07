@@ -1,0 +1,58 @@
+<div class="container mt-4">
+    <h2 class="text-center">Art Collection</h2>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let artwork of artworks">
+        <div class="card">
+          <img class="card-img-top" [src]="artwork.imageUrl" [alt]="artwork.title">
+          <div class="card-body">
+            <h5 class="card-title">{{ artwork.title }}</h5>
+            <p class="card-text">{{ artwork.description }}</p>
+            <button type="button" class="btn btn-primary" (click)="showArtworkDetails(artwork)">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedArtwork" class="modal show d-block" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">{{ selectedArtwork.title }}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="closeArtworkModal()">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img [src]="selectedArtwork.imageUrl" class="img-fluid" [alt]="selectedArtwork.title">
+            <p>{{ selectedArtwork.description }}</p>
+  
+            <div class="star-rating">
+              <i class="fas fa-star" 
+                 *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" 
+                 (click)="rateArtwork(i + 1)" 
+                 [ngClass]="{'filled': artworkRating > i}">
+              </i>
+            </div>
+  
+            <div class="comment-section mt-3">
+              <h5>Leave a Review</h5>
+              <textarea class="form-control" [(ngModel)]="commentText" rows="3" placeholder="Write your review"></textarea>
+              <button class="btn btn-secondary mt-2" (click)="submitComment()">Submit</button>
+            </div>
+  
+            <div class="reviews mt-3">
+              <h5>Reviews</h5>
+              <ul>
+                <li *ngFor="let comment of artworkComments">{{ comment }}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeArtworkModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+  
+  

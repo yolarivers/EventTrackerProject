@@ -45,7 +45,7 @@ public class Exhibition {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
-    @JoinTable(name = "exhibitions_has_artwork", joinColumns = @JoinColumn(name="exhibition_id"), 
+    @JoinTable(name = "exhibition_has_artwork", joinColumns = @JoinColumn(name="exhibition_id"), 
                inverseJoinColumns = @JoinColumn(name="artwork_id"))
     @ManyToMany
     @JsonIgnore

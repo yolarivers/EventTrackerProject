@@ -1,13 +1,56 @@
+.hero-section {
+  height: 70vh;
+  background: url('https://images.pexels.com/photos/20967/pexels-photo.jpg') no-repeat center center / cover;
+}
 
-  .card-title {
-    font-weight: bold;
-  }
-  
-  .card-img-top {
-    height: 300px;
-    object-fit: cover;
-  }
-  
-  .card-body {
-    text-align: center;
-  }
+.text-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  height: 100%;
+  text-align: center;
+}
+
+.text-overlay h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.text-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.btn-black {
+  background-color: #000;
+  color: #fff;
+  padding: 15px 30px;
+  font-size: 1rem;
+  border: none;
+  text-align: center;
+  width: 80%;
+  max-width: 200px;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-black:hover {
+  background-color: #333;
+}
+
+.text-overlay .btn-black {
+  margin-top: 10px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}

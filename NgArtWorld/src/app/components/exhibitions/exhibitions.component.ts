@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ExhibitionService } from '../../services/exhibition.service';
 import { Exhibition } from '../../models/exhibition';
 import { FormsModule } from '@angular/forms';
+import { Museum } from '../../models/museum';
+import { MuseumService } from '../../services/museum.service';
 
 @Component({
   selector: 'app-exhibitions',
@@ -14,17 +16,28 @@ import { FormsModule } from '@angular/forms';
 })
 export class ExhibitionsComponent implements OnInit {
   exhibitions: Exhibition[] = [];
+  museums: Museum[] = [];
   selectedExhibition: Exhibition | null = null;
-  newExhibition: Exhibition = new Exhibition();
+  newExhibition: Exhibition | null = null;
   editExhibition: Exhibition | null = null;
   errorMessage: string | null = null;
   selectedFile: File | null = null;
 
-  constructor(private exhibitionService: ExhibitionService) {}
+  constructor(private exhibitionService: ExhibitionService, private museumService: MuseumService) {}
 
   ngOnInit(): void {
     this.loadExhibitions();
+    this.loadMuseums();
   }
+
+  loadMuseums(): void {
+    this.museumService.getAllMuseums().subscribe({
+      next: (data: Museum[]) => {
+        this.museums = data;
+      },
+    });
+  }
+
 
   loadExhibitions(): void {
     this.exhibitionService.getExhibitions().subscribe({
@@ -39,10 +52,11 @@ showEditForm(exhibition: Exhibition): void {
 }
 
   showNewExhibitionForm(): void {
-    this.selectedExhibition = new Exhibition();
+    this.newExhibition = new Exhibition();
   }
   closeModal(): void {
     this.selectedExhibition = null;
+    this.newExhibition = null;
   }
 
   saveExhibition(exhibition:Exhibition): void {
@@ -51,6 +65,7 @@ showEditForm(exhibition: Exhibition): void {
           .addExhibition(exhibition)
           .subscribe(() => {
             this.loadExhibitions();
+            this.newExhibition = null;
             this.selectedExhibition = null;
           });
      
@@ -59,8 +74,11 @@ showEditForm(exhibition: Exhibition): void {
  
 
   deleteExhibition(id: number): void {
-    this.exhibitionService.deleteExhibition(id).subscribe(() => {
-      this.loadExhibitions();
+    this.exhibitionService.deleteExhibition(id).subscribe({
+      next: () => {
+        this.loadExhibitions();
+      }
+     
     });
   }
 }

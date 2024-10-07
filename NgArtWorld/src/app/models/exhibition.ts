@@ -1,9 +1,11 @@
 import { Artwork } from './artwork';
+import { Museum } from './museum';
 
 
 export class Exhibition {
   id: number;
   title: string;
+  museum: Museum;
 ;
   description: string;
   startDate: string;
@@ -18,6 +20,7 @@ export class Exhibition {
     description: string = '',
     startDate: string = '',
     endDate: string = '',
+    museum: Museum = new Museum(),
    
     artwork: Artwork[] = [],
     id: number = 0,
@@ -27,7 +30,7 @@ export class Exhibition {
   ) {
     this.id = id;
     this.title = title;
-   
+    this.museum = museum;
     this.description = description;
     this.startDate = startDate;
     this.endDate = endDate;

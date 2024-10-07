@@ -26,35 +26,38 @@
 
   <div *ngIf="newExhibition" class="text-center mt-4">
     
-
-  <div class="modal fade" tabindex="-1" role="dialog" [class.show]="selectedExhibition" [ngClass]="{'d-block': selectedExhibition}" style="background: rgba(0,0,0,0.5);">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">{{ selectedExhibition ? 'Edit Exhibition' : 'Add New Exhibition' }}</h5>
-          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
-        </div>
-        <div class="modal-body">
+    <!-- <div class="modal fade" tabindex="-1" role="dialog" [class.show]="selectedExhibition" [ngClass]="{'d-block': selectedExhibition}" style="background: rgba(0,0,0,0.5);"> -->
+  <div class="" tabindex="-1" role="dialog"  style="background: rgba(0,0,0,0.5);">
+    <div class="" role="document">
+      <div class="">
+       
+        <div class="">
           <form>
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" [(ngModel)]="newExhibition.title">
+              <input type="text" class="form-control" name="title" [(ngModel)]="newExhibition.title">
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" id="description" rows="3" [(ngModel)]="newExhibition.description"></textarea>
+              <textarea class="form-control" name="description" rows="3" [(ngModel)]="newExhibition.description"></textarea>
             </div>
             <div class="mb-3">
               <label for="startDate" class="form-label">Start Date</label>
-              <input type="date" class="form-control" id="startDate" [(ngModel)]="newExhibition.startDate">
+              <input type="date" class="form-control" name="startDate" [(ngModel)]="newExhibition.startDate">
             </div>
             <div class="mb-3">
               <label for="endDate" class="form-label">End Date</label>
-              <input type="date" class="form-control" id="endDate" [(ngModel)]="newExhibition.endDate">
+              <input type="date" class="form-control" name="endDate" [(ngModel)]="newExhibition.endDate">
             </div>
             <div class="mb-3">
               <label for="imageUrl" class="form-label">Image URL</label>
-              <input type="text" class="form-control" id="imageUrl" [(ngModel)]="newExhibition.imageUrl">
+              <input type="text" class="form-control" name="imageUrl" [(ngModel)]="newExhibition.imageUrl">
+            </div>
+            <div class="mb-3">
+              <label for="museum" class="form-label">Museum</label>
+              <select type="text" class="form-select" name="museum" [(ngModel)]="newExhibition.museum.id">
+                <option *ngFor="let museum of museums" [value]="museum.id">{{ museum.name }}</option>
+              </select>
             </div>
           </form>
         </div>

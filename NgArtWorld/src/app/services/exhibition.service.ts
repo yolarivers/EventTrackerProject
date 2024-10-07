@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Exhibition } from '../models/exhibition';
+import { AuthService } from './auth.service';
 
 
 
@@ -11,21 +12,30 @@ import { Exhibition } from '../models/exhibition';
 export class ExhibitionService {
   private apiUrl = 'http://localhost:8085/api/exhibitions';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
+
+  getHttpOptions(): { headers: { [header: string]: string } } {
+    return {
+      headers: {
+        Authorization: 'Basic ' + this.auth.getCredentials(),
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    };
+  }
 
   getExhibitions(): Observable<Exhibition[]> {
     return this.http.get<Exhibition[]>(this.apiUrl);
   }
 
   addExhibition(exhibition: Exhibition): Observable<Exhibition> {
-    return this.http.post<Exhibition>(this.apiUrl, exhibition);
+    return this.http.post<Exhibition>(this.apiUrl, exhibition, this.getHttpOptions());
   }
 
   updateExhibition(exhibition: Exhibition): Observable<Exhibition> {
-    return this.http.put<Exhibition>(`${this.apiUrl}/${exhibition.id}`, exhibition);
+    return this.http.put<Exhibition>(`${this.apiUrl}/${exhibition.id}`, exhibition, this.getHttpOptions());
   }
 
   deleteExhibition(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, this.getHttpOptions());
   }
 }
