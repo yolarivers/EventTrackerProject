@@ -11,4 +11,6 @@ import com.skilldistillery.artisphere.entities.Exhibition;
 public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer> {
     
     Set<Exhibition> findByMuseum_Id(int museumId);
+
+	Exhibition queryById(int id);
 }

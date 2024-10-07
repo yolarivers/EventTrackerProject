@@ -51,6 +51,7 @@ showEditForm(exhibition: Exhibition): void {
         this.editExhibition= {...exhibition}
 }
 
+
   showNewExhibitionForm(): void {
     this.newExhibition = new Exhibition();
   }
@@ -72,6 +73,18 @@ showEditForm(exhibition: Exhibition): void {
       
     }
  
+    updateExhibition(exhibition:Exhibition): void {
+   
+      this.exhibitionService
+        .updateExhibition(exhibition)
+        .subscribe(() => {
+          this.loadExhibitions();
+          this.editExhibition = null;
+          this.selectedExhibition = null;
+        });
+   
+    
+  }
 
   deleteExhibition(id: number): void {
     this.exhibitionService.deleteExhibition(id).subscribe({

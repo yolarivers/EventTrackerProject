@@ -72,7 +72,7 @@ public class ExhibitionController {
 		return new ResponseEntity<>(newExhibition, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/{id}/images")
 	public ResponseEntity<Exhibition> updateExhibition(@PathVariable int id,
 			@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam("title") String title,
 			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
@@ -108,10 +108,22 @@ public class ExhibitionController {
 		}
 	}
 
+	@PutMapping("/{id}")
+	public ResponseEntity<Exhibition> updateExhibition(@PathVariable ("id")int id, @RequestBody Exhibition exhibition,
+			HttpServletResponse res) {
+		exhibition = exhibitionService.updateExhibition(id, exhibition);
+		if (exhibition != null) {
+
+			return new ResponseEntity<>(exhibition, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
 	@DeleteMapping("/{id}")
 	public void deleteExhibition(@PathVariable("id") int id) {
 		boolean isDeleted = exhibitionService.deleteExhibition(id);
-		
+
 	}
 
 	@GetMapping

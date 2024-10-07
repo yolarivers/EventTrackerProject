@@ -21,6 +21,20 @@ public class ExhibitionServiceImpl implements ExhibitionService {
     }
 
     @Override
+    public Exhibition updateExhibition(int id, Exhibition exhibition) {
+    	Exhibition existing = exhibitionRepo.queryById(id);
+    	if (existing != null) {
+    		existing.setTitle(exhibition.getTitle());
+    		existing.setDescription(exhibition.getDescription());
+    		existing.setImageUrl(exhibition.getImageUrl());
+    		existing.setStartDate(exhibition.getStartDate());
+    		existing.setEndDate(exhibition.getEndDate());
+    		return exhibitionRepo.save(exhibition);
+    	} 
+    	return null;
+    }
+    
+    @Override
     public Exhibition getExhibitionById(int id) {
         return exhibitionRepo.findById(id).orElse(null);
     }

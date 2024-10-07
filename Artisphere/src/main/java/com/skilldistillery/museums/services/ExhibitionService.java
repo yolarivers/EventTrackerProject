@@ -8,4 +8,5 @@ public interface ExhibitionService {
     Exhibition getExhibitionById(int id);
     List<Exhibition> getAllExhibitions();
     boolean deleteExhibition(int id);
+	Exhibition updateExhibition(int id, Exhibition exhibition);
 }
