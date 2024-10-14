@@ -47,7 +47,7 @@ class ArtworkTest {
 		assertEquals("Vincent Van Gogh", artwork.getArtist());
 		assertEquals(2003, artwork.getCreationYear());
 		assertEquals("Distributed eco-centric pricing structure", artwork.getDescription());
-		assertEquals("http://dummyimage.com/171x100.png/5fa2dd/ffffff", artwork.getImageUrl());
+		assertEquals("https://upload.wikimedia.org/wikipedia/commons/c/cd/VanGogh-starry_night.jpg", artwork.getImageUrl());
 	}
 
 	@Test

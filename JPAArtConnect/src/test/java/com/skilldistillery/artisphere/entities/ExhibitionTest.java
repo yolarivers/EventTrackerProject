@@ -37,10 +37,10 @@ class ExhibitionTest {
 	@Test
 	void test_Exhibitions_entity_mapping() {
 		assertNotNull(exhibition);
-		assertEquals("installationEXPO", exhibition.getTitle());
-		assertEquals("accumsan odio", exhibition.getDescription());
+		assertEquals("Submerged", exhibition.getTitle());
+		assertEquals("Solo art exhibition Submerged", exhibition.getDescription());
 		assertEquals(LocalDate.of(2024, 10, 8), exhibition.getStartDate());
-		assertEquals("http://dummyimage.com/171x100.png/5fa2dd/ffffff", exhibition.getImageUrl());
+		assertEquals("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Robert_Standish_Submerged_solo_art_exhibition_at_Shoshana_Wayne_Gallery_in_Santa_Monica%2C_California_in_2004.jpg/800px-Robert_Standish_Submerged_solo_art_exhibition_at_Shoshana_Wayne_Gallery_in_Santa_Monica%2C_California_in_2004.jpg?20240222170440", exhibition.getImageUrl());
 	}
 
 	@Test

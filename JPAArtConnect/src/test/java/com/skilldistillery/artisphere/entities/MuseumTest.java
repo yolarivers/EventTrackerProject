@@ -45,12 +45,12 @@ class MuseumTest {
 		assertNotNull(museum);
 		assertEquals("Waters-Effertz", museum.getName());
 		assertEquals("57 Portage Alley", museum.getLocation());
-		assertEquals("Nunc nisl. Duis bibendum, felis sed vehicula tempus, felis justo fermentum justo. ",
+		assertEquals("Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti.",
 				museum.getDescription());
 		assertEquals(
 				"https://google.es/ultrices/aliquet/maecenas/leo/odio.xml?montes=pellentesque&nascetur=at&ridiculus=nulla&mus=suspendisse&etiam=potenti&vel=cras&augue=in&vestibulum=purus&rutrum=eu&rutrum=magna&neque=vulputate&aenean=luctus&auctor=cum&gravida=sociis&sem=natoque&praesent=penatibus&id=et&massa=magnis&id=dis&nisl=parturient&venenatis=montes&lacinia=nascetur&aenean=ridiculus&sit=mus&amet=vivamus&justo=vestibulum&morbi=sagittis&ut=sapien",
 				museum.getWebsiteUrl());
-		assertEquals("http://dummyimage.com/118x100.png/ff4444/ffffff", museum.getImageUrl());
+		assertEquals("https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/National_Museum_of_Modern_Art_Kyoto_2010.jpg/749px-National_Museum_of_Modern_Art_Kyoto_2010.jpg?20190209061344", museum.getImageUrl());
 	}
 
 	@Test
