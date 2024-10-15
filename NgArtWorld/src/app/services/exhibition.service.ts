@@ -6,11 +6,12 @@ import { AuthService } from './auth.service';
 
 
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ExhibitionService {
-  private apiUrl = 'http://localhost:8085/api/exhibitions';
+  private apiUrl = 'http://localhost:8080/api/exhibitions';
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
@@ -24,8 +25,9 @@ export class ExhibitionService {
   }
 
   getExhibitions(): Observable<Exhibition[]> {
-    return this.http.get<Exhibition[]>(this.apiUrl);
+    return this.http.get<Exhibition[]>(this.apiUrl, this.getHttpOptions());
   }
+  
 
   addExhibition(exhibition: Exhibition): Observable<Exhibition> {
     return this.http.post<Exhibition>(this.apiUrl, exhibition, this.getHttpOptions());
@@ -38,4 +40,4 @@ export class ExhibitionService {
   deleteExhibition(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, this.getHttpOptions());
   }
-}
+} 

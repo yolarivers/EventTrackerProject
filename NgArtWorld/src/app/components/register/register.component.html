@@ -1,14 +1,29 @@
 <h1>Register</h1>
 
-<form #registerForm="ngForm">
-  <label for="email">Email</label>
-  <input type="email" id="email" name="email" [(ngModel)]="newUser.email" required />
+<form #registerForm="ngForm" (ngSubmit)="register(newUser)">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" [(ngModel)]="newUser.email" #email="ngModel" required />
+    <div *ngIf="email.invalid && email.touched">
+      <small>Email is required.</small>
+    </div>
+  </div>
 
-  <label for="username">Username</label>
-  <input type="text" id="username" name="username" [(ngModel)]="newUser.username" required />
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" [(ngModel)]="newUser.username" #username="ngModel" required />
+    <div *ngIf="username.invalid && username.touched">
+      <small>Username is required.</small>
+    </div>
+  </div>
 
-  <label for="password">Password</label>
-  <input type="password" id="password" name="password" [(ngModel)]="newUser.password" required />
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" [(ngModel)]="newUser.password" #password="ngModel" required />
+    <div *ngIf="password.invalid && password.touched">
+      <small>Password is required.</small>
+    </div>
+  </div>
 
-  <button type="submit" (click)="register(newUser)">Submit</button>
+  <button type="submit" [disabled]="registerForm.invalid">Submit</button>
 </form>

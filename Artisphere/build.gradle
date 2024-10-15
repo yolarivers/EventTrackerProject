@@ -8,22 +8,16 @@ plugins {
 group = 'com.skilldistillery'
 version = '0.0.1-SNAPSHOT'
 
-eclipse.wtp.facet {
-   facet name: 'jst.web', version: '6.0'
-}
-
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
-
-apply plugin: 'war'
 war {
   enabled = true
   archiveFileName = "${archivesBaseName}.war"
-  destinationDirectory = file("../")          
+  destinationDirectory = file("$buildDir/libs")
 }
 
 repositories {
@@ -33,15 +27,17 @@ repositories {
 dependencies {
     implementation project(':JPAArtConnect')
     
-    
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     
-    
+
     runtimeOnly 'com.mysql:mysql-connector-j'
+
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.9.2'
@@ -50,3 +46,16 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+
+task buildFrontend(type: Exec) {
+    workingDir '../NgArtWorld'  
+    commandLine 'npm', 'run', 'build'
+}
+
+task copyFrontend(type: Copy) {
+    dependsOn buildFrontend
+    from '../NgArtWorld/dist/ng-art-world/browser'  
+    into 'src/main/resources/static'
+}
+

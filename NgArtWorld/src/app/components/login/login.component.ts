@@ -11,33 +11,25 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule],
 })
-
 export class LoginComponent {
-  username: string = '';
-  password: string = '';
-constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) {}
+
   login(loginUser: NgForm) {
     if (loginUser.valid) {
-      console.log('User Data:', {
-        username: this.username,
-        password: this.password
+      console.log('User Data:', loginUser.value);
+      
+      this.auth.login(loginUser.value.username, loginUser.value.password).subscribe({
+        next: () => {
+          this.router.navigateByUrl('/museums');
+        },
+        error: (problem) => {
+          console.error('LoginComponent.login(): Error logging in user:', problem);
+        }
       });
     } else {
       console.log('Form is invalid');
     }
- 
- 
-        this.auth.login(loginUser.value.username, loginUser.value.password).subscribe({
-          next: (loggedInUser) => {
-            this.router.navigateByUrl('/museums');
-          },
-          error: (problem) => {
-            console.error('RegisterComponent.register(): Error logging in user:');
-            console.error(problem);
-          }
-        });
-      
-  
   }
 }
+
 

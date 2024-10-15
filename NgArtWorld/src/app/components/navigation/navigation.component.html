@@ -5,8 +5,8 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" [routerLink]="['home']">
-        <img src="https://scontent-dfw5-1.xx.fbcdn.net/v/t39.30808-6/462362656_959769336194681_3792532937962326509_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f727a1&_nc_ohc=lHxWyzBNOk8Q7kNvgG_MPG8&_nc_ht=scontent-dfw5-1.xx&_nc_gid=Ag5QEQoM-0w6LW585uuLFXo&oh=00_AYAuTIWMlhyMBh3FsVqXVbi0LjkhlMJdNdLgyaPXm_h4-g&oe=670A2AE6" alt="Logo" class="logo">
+      <a class="navbar-brand" [routerLink]="['/home']">
+        <img src="https://scontent-dfw5-1.xx.fbcdn.net/v/t39.30808-6/462362656_959769336194681_3792532937962326509_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f727a1&_nc_ohc=sfmvJrbZaagQ7kNvgFx8MYY&_nc_ht=scontent-dfw5-1.xx&_nc_gid=A5UbcuzeUZjDHMnOD4dCq4m&oh=00_AYA-PI-zElmEYzr4sqqO-CXYizW2wycyBmwPGAHZY3GuKA&oe=6713D5E6" alt="Logo" class="logo">
       </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,24 +16,28 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <div class="mx-auto d-flex justify-content-center">
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['museums']">Museum</a>
+            
+            <li class="nav-item" *ngIf="!isHomePage()">
+              <a class="nav-link" [routerLink]="['/home']">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['artwork']">Artwork</a>
+              <a class="nav-link" [routerLink]="['/museums']">Museum</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['exhibitions']">Exhibitions</a>
+              <a class="nav-link" [routerLink]="['/artwork']">Artwork</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/exhibitions']">Exhibitions</a>
             </li>
           </ul>
         </div>
 
         <ul class="navbar-nav ms-auto">
           <li class="nav-item" *ngIf="!isLoggedIn()">
-            <a class="nav-link" [routerLink]="['register']">Register</a>
+            <a class="nav-link" [routerLink]="['/register']">Register</a>
           </li>
           <li class="nav-item" *ngIf="!isLoggedIn()">
-            <a class="nav-link" [routerLink]="['login']">Login</a>
+            <a class="nav-link" [routerLink]="['/login']">Login</a>
           </li>
           <li class="nav-item" *ngIf="isLoggedIn()">
             <app-logout></app-logout>
@@ -43,3 +47,4 @@
     </div>
   </nav>
 </div>
+

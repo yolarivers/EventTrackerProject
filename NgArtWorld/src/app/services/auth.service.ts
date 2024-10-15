@@ -9,8 +9,8 @@ import { Buffer } from 'buffer';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8085/';
-  private url = environment.baseUrl;
+  private baseUrl = 'http://localhost:8080/';
+  private url = environment.baseUrl + 'api/Artisphere';
 
   constructor(private http: HttpClient) {}
 
@@ -71,8 +71,9 @@ export class AuthService {
   }
 
   generateBasicAuthCredentials(username: string, password: string): string {
-    return Buffer.from(`${username}:${password}`).toString('base64');
+    return btoa(`${username}:${password}`);
   }
+  
 
   getCredentials(): string | null {
     return localStorage.getItem('credentials');

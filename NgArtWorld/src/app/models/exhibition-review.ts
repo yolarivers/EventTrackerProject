@@ -39,4 +39,4 @@ export class ExhibitionReview {
   hashCode(): number {
     return this.id;
   }
-}
+} 

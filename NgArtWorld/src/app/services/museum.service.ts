@@ -9,8 +9,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class MuseumService {
-
-  private baseUrl = `${environment.baseUrl}api/museum`;  
+  private baseUrl = `${environment.baseUrl}api/museum`;
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 

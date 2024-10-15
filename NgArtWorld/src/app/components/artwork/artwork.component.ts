@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Artwork } from '../../models/artwork';
+import { ArtworkReview } from '../../models/artwork-review';
 import { ArtworkService } from '../../services/artwork.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
@@ -12,22 +13,12 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule]
 })
 export class ArtworkComponent implements OnInit {
-openModal(_t6: any) {
-throw new Error('Method not implemented.');
-}
-deleteExhibition(arg0: any) {
-throw new Error('Method not implemented.');
-}
-closeModal() {
-throw new Error('Method not implemented.');
-}
   artworks: Artwork[] = [];  
   selectedArtwork: Artwork | null = null;
   artworkRating: number = 0;
   artworkComments: string[] = [];
   commentText: string = '';
-exhibitions: any;
-selectedExhibition: any;
+  artworkReviews: ArtworkReview[] = [];
 
   constructor(private artworkService: ArtworkService) {}
 
@@ -48,7 +39,21 @@ selectedExhibition: any;
 
   showArtworkDetails(artwork: Artwork): void {
     this.selectedArtwork = artwork;
-    this.resetArtworkDetails();
+    this.loadArtworkReviews(artwork.id);
+  }
+
+  loadArtworkReviews(artworkId: number): void {
+    this.artworkService.getArtworkReviews(artworkId).subscribe(
+      (reviews: ArtworkReview[]) => {
+        this.artworkReviews = reviews;
+        // Calculate average rating if needed
+        this.artworkRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length || 0;
+        this.artworkComments = reviews.map(review => review.comment);
+      },
+      (error: any) => {
+        console.error(`Error fetching reviews for artwork ID ${artworkId}:`, error);
+      }
+    );
   }
 
   closeArtworkModal(): void {
@@ -70,5 +75,6 @@ selectedExhibition: any;
   private resetArtworkDetails(): void {
     this.artworkRating = 0;
     this.artworkComments = [];
+    this.artworkReviews = [];
   }
 }

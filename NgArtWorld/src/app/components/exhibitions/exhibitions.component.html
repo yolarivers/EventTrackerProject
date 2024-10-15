@@ -1,10 +1,11 @@
-<div *ngIf="!newExhibition && !editExhibition"  class="container mt-4">
+
+<div *ngIf="!newExhibition && !editExhibition" class="container mt-4">
   <h2 class="text-center mb-4">Exhibitions</h2>
   <button class="btn btn-success" (click)="showNewExhibitionForm()">Add New Exhibition</button>
   <div class="row">
     <div class="col-md-4" *ngFor="let exhibition of exhibitions">
       <div class="card mb-3">
-        <img class="card-img-top" [src]="exhibition.imageUrl" alt="{{ exhibition.title }}">
+        <img class="card-img-top" [src]="exhibition.imageUrl || 'path/to/placeholder.jpg'" alt="{{ exhibition.title }}">
         <div class="card-body">
           <h5 class="card-title">{{ exhibition.title }}</h5>
           <p class="card-text">{{ exhibition.description }}</p>
@@ -23,89 +24,78 @@
 </div>
 
 
+<div *ngIf="newExhibition" class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Exhibition</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" [(ngModel)]="newExhibition.title" required placeholder="Enter exhibition title">
+            <div *ngIf="!newExhibition.title" class="text-danger">Title is required.</div>
+          </div>
+          
+          
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" name="description" rows="3" [(ngModel)]="newExhibition.description" required placeholder="Enter description"></textarea>
+          </div>
 
-  <div *ngIf="newExhibition" class="text-center mt-4">
-    
-    <!-- <div class="modal fade" tabindex="-1" role="dialog" [class.show]="selectedExhibition" [ngClass]="{'d-block': selectedExhibition}" style="background: rgba(0,0,0,0.5);"> -->
-  <div class="" tabindex="-1" role="dialog"  style="background: rgba(0,0,0,0.5);">
-    <div class="" role="document">
-      <div class="">
-       
-        <div class="">
-          <form>
-            <div class="mb-3">
-              <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" name="title" [(ngModel)]="newExhibition.title">
-            </div>
-            <div class="mb-3">
-              <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" name="description" rows="3" [(ngModel)]="newExhibition.description"></textarea>
-            </div>
-            <div class="mb-3">
+         
+          <div class="row">
+            <div class="col">
               <label for="startDate" class="form-label">Start Date</label>
-              <input type="date" class="form-control" name="startDate" [(ngModel)]="newExhibition.startDate">
+              <input type="date" class="form-control" name="startDate" [(ngModel)]="newExhibition.startDate" required>
             </div>
-            <div class="mb-3">
+            <div class="col">
               <label for="endDate" class="form-label">End Date</label>
-              <input type="date" class="form-control" name="endDate" [(ngModel)]="newExhibition.endDate">
+              <input type="date" class="form-control" name="endDate" [(ngModel)]="newExhibition.endDate" required>
             </div>
-            <div class="mb-3">
-              <label for="imageUrl" class="form-label">Image URL</label>
-              <input type="text" class="form-control" name="imageUrl" [(ngModel)]="newExhibition.imageUrl">
-            </div>
-            <div class="mb-3">
-              <label for="museum" class="form-label">Museum</label>
-              <select type="text" class="form-select" name="museum" [(ngModel)]="newExhibition.museum.id">
-                <option *ngFor="let museum of museums" [value]="museum.id">{{ museum.name }}</option>
-              </select>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
-          <button type="button" class="btn btn-primary" (click)="saveExhibition(newExhibition)">Save changes</button>
-        </div>
+          </div>
+
+         
+          <div class="mb-3">
+            <label for="imageUrl" class="form-label">Image URL</label>
+            <input type="text" class="form-control" name="imageUrl" [(ngModel)]="newExhibition.imageUrl" placeholder="Enter image URL">
+          </div>
+
+          
+          <div class="mb-3">
+            <label for="museum" class="form-label">Museum</label>
+            <select class="form-select" name="museum" [(ngModel)]="newExhibition.museum.id" required>
+              <option *ngFor="let museum of museums" [value]="museum.id">{{ museum.name }}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveExhibition(newExhibition)">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 
 
-<div *ngIf="editExhibition" class="text-center mt-4">
-    
-  <!-- <div class="modal fade" tabindex="-1" role="dialog" [class.show]="selectedExhibition" [ngClass]="{'d-block': selectedExhibition}" style="background: rgba(0,0,0,0.5);"> -->
-<div class="" tabindex="-1" role="dialog"  style="background: rgba(0,0,0,0.5);">
-  <div class="" role="document">
-    <div class="">
-     
-      <div class="">
+<div *ngIf="editExhibition" class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Exhibition</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
         <form>
-          <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" name="title" [(ngModel)]="editExhibition.title">
-          </div>
-          <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" name="description" rows="3" [(ngModel)]="editExhibition.description"></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="startDate" class="form-label">Start Date</label>
-            <input type="date" class="form-control" name="startDate" [(ngModel)]="editExhibition.startDate">
-          </div>
-          <div class="mb-3">
-            <label for="endDate" class="form-label">End Date</label>
-            <input type="date" class="form-control" name="endDate" [(ngModel)]="editExhibition.endDate">
-          </div>
-          <div class="mb-3">
-            <label for="imageUrl" class="form-label">Image URL</label>
-            <input type="text" class="form-control" name="imageUrl" [(ngModel)]="editExhibition.imageUrl">
-          </div>
-          <div class="mb-3">
-            <label for="museum" class="form-label">Museum</label>
-            <select type="text" class="form-select" name="museum" [(ngModel)]="editExhibition.museum.id">
-              <option *ngFor="let museum of museums" [value]="museum.id">{{ museum.name }}</option>
-            </select>
-          </div>
+         
         </form>
       </div>
       <div class="modal-footer">
@@ -114,5 +104,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>

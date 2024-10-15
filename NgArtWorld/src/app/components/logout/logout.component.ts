@@ -9,13 +9,15 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent {
-constructor(
-  private auth: AuthService,
-  private router: Router
-) { }
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {}
+
   logout() {
-    console.log('logout');
+    console.log('Logging out...');
     this.auth.logout();
     this.router.navigateByUrl('/home');
   }
 }
+

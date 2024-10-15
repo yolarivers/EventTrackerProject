@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Artwork } from '../models/artwork';
+import { ArtworkReview } from '../models/artwork-review';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
 
@@ -11,7 +12,7 @@ import { environment } from '../../environments/environment';
 })
 export class ArtworkService {
 
-  private baseUrl = environment.baseUrl + 'api/artwork';  
+  private baseUrl = environment.baseUrl + 'api/artwork';
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
@@ -63,4 +64,12 @@ export class ArtworkService {
       catchError(this.handleError(`deleting artwork with ID ${artworkId}`))
     );
   }
+
+  getArtworkReviews(artworkId: number): Observable<ArtworkReview[]> {
+    const url = `${this.baseUrl}/${artworkId}/reviews`;
+    return this.http.get<ArtworkReview[]>(url, this.getHttpOptions()).pipe(
+      catchError(this.handleError(`fetching reviews for artwork with ID ${artworkId}`))
+    );
+  }
+  
 }

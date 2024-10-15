@@ -1,12 +1,21 @@
 <div class="container mt-4">
   <h2 class="text-center">Art Museums</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger text-center">
+    {{ errorMessage }}
+  </div>
+
   <div class="row">
     <div class="col-md-4" *ngFor="let museum of museums">
-      <div class="card">
-        <img class="card-img-top" [src]="museum.imageUrl" alt="Museum Image">
+      <div class="card mb-4">
+        <img class="card-img-top" [src]="museum.imageUrl" [alt]="museum.name + ' Image'">
         <div class="card-body">
           <h5 class="card-title">{{ museum.name }}</h5>
           <p class="card-text">{{ museum.description }}</p>
+         
+          <a *ngIf="museum.websiteUrl" [href]="museum.websiteUrl" class="btn btn-primary" target="_blank" rel="noopener">
+            Visit Website
+          </a>
         </div>
       </div>
     </div>
